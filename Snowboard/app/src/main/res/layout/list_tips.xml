@@ -1,46 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/tip_cardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/list_margin"
-    app:cardBackgroundColor="@color/blush"
-    app:cardCornerRadius="@dimen/card_corner"
-    app:cardElevation="@dimen/elevation"
-    app:contentPadding="@dimen/content_padding">
+    android:layout_marginTop="@dimen/history_card_gap"
+    app:cardBackgroundColor="@color/history_card"
+    app:cardCornerRadius="@dimen/history_card_corner"
+    app:cardElevation="0dp"
+    app:strokeWidth="0dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="@dimen/contain_margin">
+        android:layout_height="wrap_content"
+        android:padding="14dp">
 
-        <ImageView
-            android:id="@+id/icon_info"
-            android:layout_width="@dimen/list_img"
-            android:layout_height="@dimen/list_img"
-            android:layout_marginEnd="@dimen/contain_margin"
-            android:src="@drawable/ic_equipment"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <FrameLayout
+            android:id="@+id/tip_badge"
+            android:layout_width="@dimen/tip_badge"
+            android:layout_height="@dimen/tip_badge"
+            android:background="@drawable/bg_tip_badge"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/icon_info"
+                android:layout_width="@dimen/tip_badge_icon"
+                android:layout_height="@dimen/tip_badge_icon"
+                android:layout_gravity="center"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_snowboarding"
+                app:tint="@color/wine_maroon" />
+        </FrameLayout>
+
+        <View
+            android:id="@+id/tip_divider"
+            android:layout_width="1.5dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="14dp"
+            android:background="@color/history_divider"
+            app:layout_constraintBottom_toBottomOf="@id/tip_badge"
+            app:layout_constraintStart_toEndOf="@id/tip_badge"
+            app:layout_constraintTop_toTopOf="@id/tip_badge" />
 
         <TextView
             android:id="@+id/title"
-            android:layout_width="@dimen/no_dimen"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/tip_start_end"
-            android:layout_marginEnd="@dimen/tip_start_end"
-            android:layout_toEndOf="@id/icon_info"
-            android:text="Bend Your Knees"
-            android:textColor="@color/midnight"
-            android:textSize="@dimen/tip_title"
-            android:textStyle="bold"
+            android:layout_marginStart="14dp"
+            android:layout_marginEnd="8dp"
             android:ellipsize="end"
+            android:fontFamily="@font/merriweathersans_bold"
             android:maxLines="2"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toRightOf="@id/icon_info"
+            android:textColor="@color/wine_maroon"
+            android:textSize="@dimen/tip_card_title"
+            app:layout_constraintEnd_toStartOf="@id/tip_chevron"
+            app:layout_constraintStart_toEndOf="@id/tip_divider"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintRight_toRightOf="parent"/>
+            tools:text="Bend Your Knees" />
 
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:ellipsize="end"
+            android:lineSpacingMultiplier="1.25"
+            android:maxLines="4"
+            android:textColor="@color/history_body_text"
+            android:textSize="@dimen/tip_card_body"
+            app:layout_constraintEnd_toEndOf="@id/title"
+            app:layout_constraintStart_toStartOf="@id/title"
+            app:layout_constraintTop_toBottomOf="@id/title"
+            tools:text="With your eyes up and looking forward, the other thing you want to remember is to bend your knees." />
+
+        <ImageView
+            android:id="@+id/tip_chevron"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_chevron_right"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/wine_maroon" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

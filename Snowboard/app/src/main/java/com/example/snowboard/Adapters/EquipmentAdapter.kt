@@ -28,6 +28,7 @@ class EquipmentAdapter(
         val currentItem = equipmentList[position]
 
         holder.imageView.setImageResource(currentItem.equipmentImage)
+        holder.iconView.setImageResource(currentItem.equipmentIcon)
         holder.textTitle.text = currentItem.equipmentTitle
         holder.textInstruction.text = currentItem.equipmentDescription
 
@@ -46,6 +47,7 @@ class EquipmentAdapter(
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imageView: ImageView = itemView.findViewById(R.id.equipment_image)
+        val iconView: ImageView = itemView.findViewById(R.id.equipment_icon)
         val textTitle: TextView = itemView.findViewById(R.id.equipment_title)
         val textInstruction: TextView = itemView.findViewById(R.id.equipment_instruction)
         val cardView: MaterialCardView = itemView.findViewById(R.id.equipment_cardView)

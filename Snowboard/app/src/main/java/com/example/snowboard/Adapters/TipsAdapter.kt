@@ -28,8 +28,9 @@ class TipsAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val component = tipsList[position]
 
-        holder.imageView.setImageResource(component.tipImage)
+        holder.imageView.setImageResource(component.tipIcon)
         holder.textTitle.text = component.tipTitle
+        holder.textDescription.text = component.tipDescription
 
         // 1. Give this specific card a unique transition name based on its title
         holder.cardView.transitionName = "card_transform_${component.tipTitle}"
@@ -47,6 +48,7 @@ class TipsAdapter(
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imageView: ImageView = itemView.findViewById(R.id.icon_info)
         val textTitle: TextView = itemView.findViewById(R.id.title)
+        val textDescription: TextView = itemView.findViewById(R.id.description)
         val cardView: MaterialCardView = itemView.findViewById(R.id.tip_cardView)
     }
 }

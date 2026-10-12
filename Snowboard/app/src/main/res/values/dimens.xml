@@ -7,8 +7,6 @@
     <dimen name="close_btn_detail">48dp</dimen>
     <dimen name="spacing">4dp</dimen>
     <dimen name="history_logo">50dp</dimen>
-    <dimen name="list_img">110dp</dimen>
-    <dimen name="arrow_down">32dp</dimen>
     <dimen name="header_mer_pad">16dp</dimen>
     <dimen name="header_img_profile">64dp</dimen>
     <dimen name="nav_row_height">46dp</dimen>
@@ -20,9 +18,7 @@
     <dimen name="nav_footer_height">140dp</dimen>
 
     //CardView
-    <dimen name="card_corner_equip">4dp</dimen>
     <dimen name="card_corner">12dp</dimen>
-    <dimen name="elevation_equip">2dp</dimen>
     <dimen name="elevation">3dp</dimen>
 
     //Width
@@ -34,8 +30,6 @@
     <dimen name="layout_box_height">88dp</dimen>
     <dimen name="history_img">250dp</dimen>
     <dimen name="main_logo">450dp</dimen>
-    <dimen name="equip_img">180dp</dimen>
-    <dimen name="ski_map">300dp</dimen>
     <dimen name="header_layout">188dp</dimen>
 
     //Margin
@@ -53,18 +47,47 @@
     <dimen name="start_end_btn">30dp</dimen>
     <dimen name="list_margin">5dp</dimen>
     <dimen name="tip_start_end">20dp</dimen>
-    <dimen name="info_ski_top">16dp</dimen>
-    <dimen name="ski_title_top">20dp</dimen>
 
     //Padding
     <dimen name="ic_padding">15dp</dimen>
     <dimen name="recycler_padding">4dp</dimen>
     <dimen name="content_padding">4dp</dimen>
-    <dimen name="equip_padding">12dp</dimen>
     <dimen name="nav_header_start">8dp</dimen>
 
     //Home Screen
     <dimen name="home_hero_height">300dp</dimen>
+    <dimen name="history_header_height">92dp</dimen>
+    <dimen name="history_avatar">48dp</dimen>
+    <dimen name="history_card_corner">20dp</dimen>
+    <dimen name="history_card_gap">16dp</dimen>
+    <dimen name="history_card_pad">18dp</dimen>
+    <dimen name="history_section_icon">36dp</dimen>
+    <dimen name="history_section_title">24sp</dimen>
+    <dimen name="history_sub_title">18sp</dimen>
+    <dimen name="history_body">15sp</dimen>
+    <dimen name="history_photo_height">200dp</dimen>
+    <dimen name="history_footer_height">140dp</dimen>
+    <dimen name="history_badge">46dp</dimen>
+    <dimen name="history_row_title">21sp</dimen>
+    <dimen name="history_row_body">14sp</dimen>
+    <dimen name="history_freeride_photo">170dp</dimen>
+    <dimen name="tip_badge">58dp</dimen>
+    <dimen name="tip_badge_icon">32dp</dimen>
+    <dimen name="tip_badge_corner">14dp</dimen>
+    <dimen name="tip_card_title">17sp</dimen>
+    <dimen name="tip_card_body">13sp</dimen>
+    <dimen name="equip_card_height">150dp</dimen>
+    <dimen name="equip_card_gap">12dp</dimen>
+    <dimen name="equip_card_gap_half">6dp</dimen>
+    <dimen name="equip_grid_padding">10dp</dimen>
+    <dimen name="equip_badge">40dp</dimen>
+    <dimen name="equip_badge_icon">24dp</dimen>
+    <dimen name="equip_accent_width">22dp</dimen>
+    <dimen name="equip_title_height">24dp</dimen>
+    <dimen name="ski_resort_img">110dp</dimen>
+    <dimen name="ski_pin">22dp</dimen>
+    <dimen name="ski_arrow">28dp</dimen>
+    <dimen name="ski_accent_width">30dp</dimen>
     <dimen name="home_card_corner_lg">12dp</dimen>
     <dimen name="home_quick_icon">48dp</dimen>
     <dimen name="home_nearby_card_width">156dp</dimen>

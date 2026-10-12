@@ -1,181 +1,385 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.core.widget.NestedScrollView
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
         android:background="@color/ghost_white"
         tools:context=".Fragments.HistoryScreenFragment">
 
+        <!-- Header stays on top, slides away when scrolling down and returns when scrolling up -->
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:stateListAnimator="@null"
+            app:elevation="0dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_scrollFlags="scroll|enterAlways|snap">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/header_art"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/history_header_height"
+                android:background="@color/wine_maroon"
+                android:contentDescription="@null"
+                android:scaleType="matrix"
+                android:src="@drawable/bg_home_hero_art"
+                app:shapeAppearanceOverlay="@style/HeroImageShape"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/btn_menu"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="20dp"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_menu"
+                app:layout_constraintBottom_toBottomOf="@id/img_avatar"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/img_avatar"
+                app:tint="@color/white" />
+
+            <TextView
+                android:id="@+id/txt_history_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/merriweathersans_semibold"
+                android:gravity="center"
+                android:text="@string/history_header"
+                android:textColor="@color/white"
+                android:textSize="@dimen/home_title_text"
+                app:layout_constraintBottom_toBottomOf="@id/img_avatar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/img_avatar" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/img_avatar"
+                android:layout_width="@dimen/history_avatar"
+                android:layout_height="@dimen/history_avatar"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="16dp"
+                android:background="@color/blush"
+                android:contentDescription="@null"
+                android:padding="3dp"
+                android:src="@drawable/ic_snowboard_logo"
+                app:shapeAppearanceOverlay="@style/CircleImageStyle"
+                app:strokeColor="@color/white"
+                app:strokeWidth="2.5dp"
+                app:tint="@color/wine_maroon"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingBottom="@dimen/history_footer_height"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
         <LinearLayout
             android:id="@+id/containerHistory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/contain_margin"
+            android:paddingStart="@dimen/start_end_margin"
+            android:paddingEnd="@dimen/start_end_margin"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:id="@+id/headerHistory"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal">
+            <!-- Snowboard -->
+            <LinearLayout style="@style/HistoryCard">
+
+                <LinearLayout style="@style/HistoryCardHeader">
+
+                    <ImageView
+                        style="@style/HistorySectionIcon"
+                        android:src="@drawable/ic_snowboarding" />
+
+                    <View style="@style/HistorySectionDivider" />
+
+                    <TextView
+                        android:id="@+id/historyTitle"
+                        style="@style/HistorySectionTitle"
+                        android:text="@string/history_header"
+                        android:textColor="@color/shadow_black" />
+                </LinearLayout>
 
                 <TextView
-                    android:id="@+id/historyTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/start_end_history"
-                    android:text="Snowboard"
-                    android:textSize="@dimen/history_title"
-                    android:textStyle="bold" />
-
-                <ImageView
-                    android:id="@+id/imgHistory"
-                    android:layout_width="@dimen/history_logo"
-                    android:layout_height="@dimen/history_logo"
-                    android:layout_marginStart="@dimen/start_end_history"
-                    android:src="@drawable/ic_snowboard_logo" />
+                    android:id="@+id/paragraphHistory_1"
+                    style="@style/HistoryBody"
+                    android:text="@string/paragraph_history_1" />
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/paragraphHistory_1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/top_bot_history"
-                android:layout_marginBottom="@dimen/top_bot_history"
-                android:text="@string/paragraph_history_1"
-                android:textSize="@dimen/history_desc" />
-
-            <ImageView
+            <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/imgSnowboard"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/history_img"
-                android:layout_marginTop="@dimen/top_bot_history"
-                android:layout_marginBottom="@dimen/top_bot_history"
-                android:src="@drawable/snowboard_history" />
+                android:layout_height="@dimen/history_photo_height"
+                android:layout_marginTop="@dimen/history_card_gap"
+                android:contentDescription="@null"
+                android:scaleType="centerCrop"
+                android:src="@drawable/snowboard_history"
+                app:shapeAppearanceOverlay="@style/RoundedImageStyle" />
 
-            <TextView
-                android:id="@+id/titleHistory"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/top_bot_history"
-                android:layout_marginBottom="@dimen/top_bot_history"
-                android:text="История"
-                android:textAlignment="center"
-                android:textSize="@dimen/history_title"
-                android:textStyle="bold" />
+            <!-- History -->
+            <LinearLayout style="@style/HistoryCard">
 
-            <TextView
-                android:id="@+id/paragraphHistory_2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/top_bot_history"
-                android:layout_marginBottom="@dimen/top_bot_history"
-                android:text="@string/paragraph_history_2"
-                android:textSize="@dimen/history_desc" />
+                <LinearLayout style="@style/HistoryCardHeader">
 
-            <TextView
-                android:id="@+id/titleStyles"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/top_bot_history"
-                android:layout_marginBottom="@dimen/top_bot_history"
-                android:text="Стилове"
-                android:textAlignment="center"
-                android:textSize="@dimen/history_title"
-                android:textStyle="bold" />
+                    <ImageView
+                        style="@style/HistorySectionIcon"
+                        android:src="@drawable/ic_menu_book" />
 
-            <TextView
-                android:id="@+id/paragraphHistory_3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/top_bot_history"
-                android:layout_marginBottom="@dimen/top_bot_history"
-                android:text="@string/paragraph_history_3"
-                android:textSize="@dimen/history_desc" />
+                    <View style="@style/HistorySectionDivider" />
 
-            <TextView
-                android:id="@+id/titleStyles1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/top_bot_history"
-                android:layout_marginBottom="@dimen/top_bot_history"
-                android:text="Фрийрайд"
-                android:textAlignment="center"
-                android:textSize="@dimen/history_style"
-                android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/titleHistory"
+                        style="@style/HistorySectionTitle"
+                        android:text="@string/history_title_history" />
+                </LinearLayout>
 
-            <TextView
-                android:id="@+id/paragraphHistory_4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/top_bot_history"
-                android:layout_marginBottom="@dimen/top_bot_history"
-                android:text="@string/paragraph_history_4"
-                android:textSize="@dimen/history_desc" />
+                <TextView
+                    android:id="@+id/paragraphHistory_2"
+                    style="@style/HistoryBody"
+                    android:text="@string/paragraph_history_2" />
+            </LinearLayout>
 
-            <TextView
-                android:id="@+id/titleStyles2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/top_bot_history"
-                android:layout_marginBottom="@dimen/top_bot_history"
-                android:text="Фрийстайл"
-                android:textAlignment="center"
-                android:textSize="@dimen/history_style"
-                android:textStyle="bold" />
+            <!-- Styles -->
+            <androidx.constraintlayout.widget.ConstraintLayout style="@style/HistoryRowCard">
 
-            <TextView
-                android:id="@+id/paragraphHistory_5"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/top_bot_history"
-                android:layout_marginBottom="@dimen/top_bot_history"
-                android:text="@string/paragraph_history_5"
-                android:textSize="@dimen/history_desc" />
+                <ImageView
+                    android:id="@+id/badgeStyles"
+                    style="@style/HistoryBadge"
+                    android:src="@drawable/ic_history_styles"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/titleStyles3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/top_bot_history"
-                android:layout_marginBottom="@dimen/top_bot_history"
-                android:text="Бордъркрос"
-                android:textAlignment="center"
-                android:textSize="@dimen/history_style"
-                android:textStyle="bold" />
+                <View
+                    android:id="@+id/dividerStyles"
+                    style="@style/HistoryRowDivider"
+                    app:layout_constraintStart_toEndOf="@id/badgeStyles"
+                    app:layout_constraintTop_toTopOf="@id/badgeStyles" />
 
-            <TextView
-                android:id="@+id/paragraphHistory_6"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/top_bot_history"
-                android:layout_marginBottom="@dimen/top_bot_history"
-                android:text="@string/paragraph_history_6"
-                android:textSize="@dimen/history_desc" />
+                <TextView
+                    android:id="@+id/titleStyles"
+                    style="@style/HistoryRowTitle"
+                    android:text="@string/history_title_styles"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/dividerStyles"
+                    app:layout_constraintTop_toTopOf="@id/badgeStyles" />
 
-            <TextView
-                android:id="@+id/titleTricks"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/top_bot_history"
-                android:layout_marginBottom="@dimen/top_bot_history"
-                android:text="Трикове"
-                android:textAlignment="center"
-                android:textSize="@dimen/history_title"
-                android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/paragraphHistory_3"
+                    style="@style/HistoryRowBody"
+                    android:text="@string/paragraph_history_3"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/titleStyles"
+                    app:layout_constraintTop_toBottomOf="@id/titleStyles" />
 
-            <TextView
-                android:id="@+id/paragraphHistory_7"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/top_bot_history"
-                android:layout_marginBottom="@dimen/bot_history"
-                android:text="@string/paragraph_history_7"
-                android:textSize="@dimen/history_desc" />
+                <ImageView
+                    android:id="@+id/artStyles"
+                    style="@style/HistoryRowArt"
+                    android:src="@drawable/art_history_styles"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintDimensionRatio="323:195"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/paragraphHistory_3" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Freeride -->
+            <androidx.constraintlayout.widget.ConstraintLayout style="@style/HistoryRowCard">
+
+                <ImageView
+                    android:id="@+id/badgeFreeride"
+                    style="@style/HistoryBadge"
+                    android:src="@drawable/ic_history_freeride"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:id="@+id/dividerFreeride"
+                    style="@style/HistoryRowDivider"
+                    app:layout_constraintStart_toEndOf="@id/badgeFreeride"
+                    app:layout_constraintTop_toTopOf="@id/badgeFreeride" />
+
+                <TextView
+                    android:id="@+id/titleStyles1"
+                    style="@style/HistoryRowTitle"
+                    android:text="@string/history_title_styles_1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/dividerFreeride"
+                    app:layout_constraintTop_toTopOf="@id/badgeFreeride" />
+
+                <TextView
+                    android:id="@+id/paragraphHistory_4"
+                    style="@style/HistoryRowBody"
+                    android:text="@string/paragraph_history_4"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/titleStyles1"
+                    app:layout_constraintTop_toBottomOf="@id/titleStyles1" />
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/imgFreeride"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/history_freeride_photo"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:contentDescription="@null"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/snowboard_history"
+                    app:shapeAppearanceOverlay="@style/RoundedImageStyle"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/titleStyles1"
+                    app:layout_constraintTop_toBottomOf="@id/paragraphHistory_4" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Freestyle -->
+            <androidx.constraintlayout.widget.ConstraintLayout style="@style/HistoryRowCard">
+
+                <ImageView
+                    android:id="@+id/badgeFreestyle"
+                    style="@style/HistoryBadge"
+                    android:src="@drawable/ic_history_freestyle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:id="@+id/dividerFreestyle"
+                    style="@style/HistoryRowDivider"
+                    app:layout_constraintStart_toEndOf="@id/badgeFreestyle"
+                    app:layout_constraintTop_toTopOf="@id/badgeFreestyle" />
+
+                <TextView
+                    android:id="@+id/titleStyles2"
+                    style="@style/HistoryRowTitle"
+                    android:text="@string/history_title_styles_2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/dividerFreestyle"
+                    app:layout_constraintTop_toTopOf="@id/badgeFreestyle" />
+
+                <TextView
+                    android:id="@+id/paragraphHistory_5"
+                    style="@style/HistoryRowBody"
+                    android:text="@string/paragraph_history_5"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/titleStyles2"
+                    app:layout_constraintTop_toBottomOf="@id/titleStyles2" />
+
+                <ImageView
+                    android:id="@+id/artFreestyle"
+                    style="@style/HistoryRowArt"
+                    android:src="@drawable/art_history_freestyle"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintDimensionRatio="335:148"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/paragraphHistory_5" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Boardercross -->
+            <androidx.constraintlayout.widget.ConstraintLayout style="@style/HistoryRowCard">
+
+                <ImageView
+                    android:id="@+id/badgeBoardercross"
+                    style="@style/HistoryBadge"
+                    android:src="@drawable/ic_history_boardercross"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:id="@+id/dividerBoardercross"
+                    style="@style/HistoryRowDivider"
+                    app:layout_constraintStart_toEndOf="@id/badgeBoardercross"
+                    app:layout_constraintTop_toTopOf="@id/badgeBoardercross" />
+
+                <TextView
+                    android:id="@+id/titleStyles3"
+                    style="@style/HistoryRowTitle"
+                    android:text="@string/history_title_styles_3"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/dividerBoardercross"
+                    app:layout_constraintTop_toTopOf="@id/badgeBoardercross" />
+
+                <TextView
+                    android:id="@+id/paragraphHistory_6"
+                    style="@style/HistoryRowBody"
+                    android:text="@string/paragraph_history_6"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/titleStyles3"
+                    app:layout_constraintTop_toBottomOf="@id/titleStyles3" />
+
+                <ImageView
+                    android:id="@+id/artBoardercross"
+                    style="@style/HistoryRowArt"
+                    android:src="@drawable/art_history_boardercross"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintDimensionRatio="343:130"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/paragraphHistory_6" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Tricks -->
+            <androidx.constraintlayout.widget.ConstraintLayout style="@style/HistoryRowCard">
+
+                <ImageView
+                    android:id="@+id/badgeTricks"
+                    style="@style/HistoryBadge"
+                    android:src="@drawable/ic_history_tricks"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:id="@+id/dividerTricks"
+                    style="@style/HistoryRowDivider"
+                    app:layout_constraintStart_toEndOf="@id/badgeTricks"
+                    app:layout_constraintTop_toTopOf="@id/badgeTricks" />
+
+                <TextView
+                    android:id="@+id/titleTricks"
+                    style="@style/HistoryRowTitle"
+                    android:text="@string/history_title_tricks"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/dividerTricks"
+                    app:layout_constraintTop_toTopOf="@id/badgeTricks" />
+
+                <TextView
+                    android:id="@+id/paragraphHistory_7"
+                    style="@style/HistoryRowBody"
+                    android:text="@string/paragraph_history_7"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/titleTricks"
+                    app:layout_constraintTop_toBottomOf="@id/titleTricks" />
+
+                <ImageView
+                    android:id="@+id/artTricks"
+                    style="@style/HistoryRowArt"
+                    android:src="@drawable/art_history_tricks"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintDimensionRatio="333:265"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/paragraphHistory_7" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
+        </androidx.core.widget.NestedScrollView>
+
+        <!-- Forest stays pinned to the bottom while the cards scroll beneath it -->
+        <ImageView
+            android:id="@+id/footer_art"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/history_footer_height"
+            android:layout_gravity="bottom"
+            android:contentDescription="@null"
+            android:scaleType="centerCrop"
+            android:src="@drawable/bg_history_footer" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

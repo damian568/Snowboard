@@ -26,4 +26,11 @@
     <color name="blush_deep">#E3D0C9</color>
     <color name="pearl_background">#F9F7F8</color>
     <color name="field_stroke">#E0DCDC</color>
+
+    <!-- History -->
+    <color name="history_card">#E6F7EEF1</color>
+    <color name="history_card_header">#F7E0E7</color>
+    <color name="history_body_text">#3E3B4F</color>
+    <color name="history_divider">#80720423</color>
+    <color name="ski_link_row">#B3F7E0E7</color>
 </resources>

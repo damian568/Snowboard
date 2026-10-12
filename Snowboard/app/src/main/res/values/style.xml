@@ -106,4 +106,115 @@
         <item name="android:layout_marginEnd">@dimen/nav_row_horizontal_pad</item>
         <item name="android:background">@color/field_stroke</item>
     </style>
+
+    <!-- History screen cards -->
+    <style name="HistoryCard">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/history_card_gap</item>
+        <item name="android:background">@drawable/bg_history_card</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="HistoryCardHeader">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/bg_history_card_header</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:paddingStart">@dimen/history_card_pad</item>
+        <item name="android:paddingEnd">@dimen/history_card_pad</item>
+        <item name="android:paddingTop">14dp</item>
+        <item name="android:paddingBottom">14dp</item>
+    </style>
+
+    <style name="HistorySectionIcon">
+        <item name="android:layout_width">@dimen/history_section_icon</item>
+        <item name="android:layout_height">@dimen/history_section_icon</item>
+        <item name="android:contentDescription">@null</item>
+        <item name="tint">@color/wine_maroon</item>
+    </style>
+
+    <style name="HistorySectionDivider">
+        <item name="android:layout_width">1.5dp</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:layout_marginStart">16dp</item>
+        <item name="android:layout_marginEnd">16dp</item>
+        <item name="android:background">@color/history_divider</item>
+    </style>
+
+    <style name="HistorySectionTitle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:fontFamily">@font/merriweathersans_bold</item>
+        <item name="android:textColor">@color/wine_maroon</item>
+        <item name="android:textSize">@dimen/history_section_title</item>
+    </style>
+
+    <style name="HistoryBody">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingStart">@dimen/history_card_pad</item>
+        <item name="android:paddingEnd">@dimen/history_card_pad</item>
+        <item name="android:paddingTop">14dp</item>
+        <item name="android:paddingBottom">18dp</item>
+        <item name="android:lineSpacingMultiplier">1.3</item>
+        <item name="android:textColor">@color/history_body_text</item>
+        <item name="android:textSize">@dimen/history_body</item>
+    </style>
+
+    <!-- History part 2 cards: badge | divider | title + text, illustration in the corner -->
+    <style name="HistoryRowCard">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/history_card_gap</item>
+        <item name="android:background">@drawable/bg_history_card</item>
+    </style>
+
+    <style name="HistoryBadge">
+        <item name="android:layout_width">@dimen/history_badge</item>
+        <item name="android:layout_height">@dimen/history_badge</item>
+        <item name="android:layout_marginStart">14dp</item>
+        <item name="android:layout_marginTop">14dp</item>
+        <item name="android:contentDescription">@null</item>
+        <item name="android:scaleType">fitCenter</item>
+    </style>
+
+    <style name="HistoryRowDivider">
+        <item name="android:layout_width">1.5dp</item>
+        <item name="android:layout_height">34dp</item>
+        <item name="android:layout_marginStart">12dp</item>
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:background">@color/history_divider</item>
+    </style>
+
+    <style name="HistoryRowTitle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">12dp</item>
+        <item name="android:layout_marginEnd">16dp</item>
+        <item name="android:fontFamily">@font/merriweathersans_bold</item>
+        <item name="android:textColor">@color/wine_maroon</item>
+        <item name="android:textSize">@dimen/history_row_title</item>
+    </style>
+
+    <style name="HistoryRowBody">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:layout_marginEnd">16dp</item>
+        <item name="android:lineSpacingMultiplier">1.25</item>
+        <item name="android:textColor">@color/history_body_text</item>
+        <item name="android:textSize">@dimen/history_row_body</item>
+    </style>
+
+    <style name="HistoryRowArt">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:contentDescription">@null</item>
+        <item name="android:scaleType">fitEnd</item>
+        <item name="layout_constraintWidth_percent">0.5</item>
+    </style>
 </resources>

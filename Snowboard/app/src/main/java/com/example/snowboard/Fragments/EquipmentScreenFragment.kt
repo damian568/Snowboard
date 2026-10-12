@@ -1,16 +1,18 @@
 package com.example.snowboard.Fragments
 
-import android.graphics.Rect
+import android.graphics.Matrix
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
+import androidx.core.view.doOnLayout
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.snowboard.Adapters.EquipmentAdapter
 import com.example.snowboard.Lists.EquipmentList
 import com.example.snowboard.R
@@ -30,6 +32,8 @@ class EquipmentScreenFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.btnMenu.setOnClickListener { openDrawer() }
+        cropHeaderArtToTop()
         dataInitialize()
 
         // 1. Setup Grid Layout
@@ -56,17 +60,26 @@ class EquipmentScreenFragment : Fragment() {
         }
 
         binding.recyclerView.adapter = adapter
+    }
 
-        // 3. Add Spacing
-        binding.recyclerView.addItemDecoration(object : RecyclerView.ItemDecoration() {
-            override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
-                val spacing = 16 // in pixels
-                outRect.left = spacing
-                outRect.right = spacing
-                outRect.bottom = spacing
-                outRect.top = spacing
+    private fun openDrawer() {
+        requireActivity().findViewById<DrawerLayout>(R.id.drawerLayout)
+            ?.openDrawer(GravityCompat.START)
+    }
+
+    // Scale the art to fill the header and keep its dark sky behind the title
+    private fun cropHeaderArtToTop() {
+        binding.headerArt.doOnLayout { view ->
+            val art = binding.headerArt.drawable ?: return@doOnLayout
+            val scale = maxOf(
+                view.width.toFloat() / art.intrinsicWidth,
+                view.height.toFloat() / art.intrinsicHeight
+            )
+            binding.headerArt.imageMatrix = Matrix().apply {
+                setScale(scale, scale)
+                postTranslate((view.width - art.intrinsicWidth * scale) / 2f, 0f)
             }
-        })
+        }
     }
 
     override fun onResume() {
@@ -88,70 +101,80 @@ class EquipmentScreenFragment : Fragment() {
             EquipmentList(
                 R.drawable.snowboard_pic_equipment,
                 getString(R.string.equipment_title_1),
-                getString(R.string.equipment_instruction)
+                getString(R.string.equipment_instruction),
+                R.drawable.ic_gear_snowboard
             )
         )
         equipmentArrayList.add(
             EquipmentList(
                 R.drawable.bindings_pic_equipment,
                 getString(R.string.equipment_title_2),
-                getString(R.string.equipment_instruction)
+                getString(R.string.equipment_instruction),
+                R.drawable.ic_gear_bindings
             )
         )
         equipmentArrayList.add(
             EquipmentList(
                 R.drawable.boots_pic_equipment,
                 getString(R.string.equipment_title_3),
-                getString(R.string.equipment_instruction)
+                getString(R.string.equipment_instruction),
+                R.drawable.ic_gear_boots
             )
         )
         equipmentArrayList.add(
             EquipmentList(
                 R.drawable.helmet_pic_equipment,
                 getString(R.string.equipment_title_4),
-                getString(R.string.equipment_instruction)
+                getString(R.string.equipment_instruction),
+                R.drawable.ic_gear_helmet
             )
         )
         equipmentArrayList.add(
             EquipmentList(
                 R.drawable.goggles_pic_equipment,
                 getString(R.string.equipment_title_5),
-                getString(R.string.equipment_instruction)
+                getString(R.string.equipment_instruction),
+                R.drawable.ic_gear_goggles
             )
         )
         equipmentArrayList.add(
             EquipmentList(
                 R.drawable.jacket_pic_equipment,
                 getString(R.string.equipment_title_6),
-                getString(R.string.equipment_instruction)
+                getString(R.string.equipment_instruction),
+                R.drawable.ic_gear_jacket
             )
         )
         equipmentArrayList.add(
             EquipmentList(
                 R.drawable.pants_pic_equipment,
                 getString(R.string.equipment_title_7),
-                getString(R.string.equipment_instruction)
+                getString(R.string.equipment_instruction),
+                R.drawable.ic_gear_pants
             )
         )
         equipmentArrayList.add(
             EquipmentList(
                 R.drawable.gloves_pic_equipment,
                 getString(R.string.equipment_title_8),
-                getString(R.string.equipment_instruction)
+                getString(R.string.equipment_instruction),
+                R.drawable.ic_gear_gloves
             )
         )
         equipmentArrayList.add(
             EquipmentList(
                 R.drawable.base_layers_pic_equipment,
                 getString(R.string.equipment_title_9),
-                getString(R.string.equipment_instruction)
+                getString(R.string.equipment_instruction),
+                R.drawable.ic_gear_base_layers
             )
         )
         equipmentArrayList.add(
             EquipmentList(
                 R.drawable.socks_pic_equipment,
                 getString(R.string.equipment_title_10),
-                getString(R.string.equipment_instruction)
+                getString(R.string.equipment_instruction),
+                R.drawable.ic_gear_socks
             )
         )
     }

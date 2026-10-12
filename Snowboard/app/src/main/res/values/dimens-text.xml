@@ -11,16 +11,18 @@
     <dimen name="history_title">25sp</dimen>
     <dimen name="main_title">24sp</dimen>
     <dimen name="video_title">23sp</dimen>
-    <dimen name="equip_title">18sp</dimen>
+    <dimen name="equip_title">16sp</dimen>
     <dimen name="tip_title">23sp</dimen>
-    <dimen name="ski_title">23sp</dimen>
+    <dimen name="ski_title">22sp</dimen>
+    <dimen name="ski_desc">14sp</dimen>
+    <dimen name="ski_link">15sp</dimen>
     <dimen name="header_title">16sp</dimen>
 
     //Desc - Info
     <dimen name="detail_desc_text">18sp</dimen>
     <dimen name="history_desc">15sp</dimen>
     <dimen name="history_style">20sp</dimen>
-    <dimen name="equip_desc">14sp</dimen>
+    <dimen name="equip_desc">9sp</dimen>
     <dimen name="header_email">14sp</dimen>
 
     //Login - Register - Profile

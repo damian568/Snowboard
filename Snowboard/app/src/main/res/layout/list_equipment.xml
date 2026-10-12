@@ -1,51 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/equipment_cardView"
-    android:layout_margin="@dimen/contain_margin"
-    app:cardCornerRadius="@dimen/card_corner_equip"
-    app:cardBackgroundColor="@color/blush"
-    app:cardElevation="@dimen/elevation_equip">
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/equip_card_height"
+    android:layout_marginStart="@dimen/equip_card_gap_half"
+    android:layout_marginTop="@dimen/equip_card_gap"
+    android:layout_marginEnd="@dimen/equip_card_gap_half"
+    app:cardBackgroundColor="@color/history_card"
+    app:cardCornerRadius="@dimen/history_card_corner"
+    app:cardElevation="0dp"
+    app:strokeWidth="0dp">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:paddingStart="12dp"
+        android:paddingTop="12dp"
+        android:paddingEnd="4dp"
+        android:paddingBottom="12dp">
 
-        <ImageView
-            android:id="@+id/equipment_image"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/equip_img"
-            android:scaleType="centerCrop"
-            android:src="@drawable/snowboard_history" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/equipment_text_end"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="@dimen/equip_padding">
+            app:layout_constraintGuide_percent="0.52" />
 
-            <TextView
-                android:id="@+id/equipment_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/equip_title"
-                android:textStyle="bold" />
+        <!-- Product photo sits on the right, the text keeps to the left -->
+        <ImageView
+            android:id="@+id/equipment_image"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:contentDescription="@null"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/equipment_chevron"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="@id/equipment_text_end"
+            tools:src="@drawable/boots_pic_equipment" />
 
-            <TextView
-                android:id="@+id/equipment_instruction"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/card_corner_equip"
-                android:text=""
-                android:textAllCaps="true"
-                android:textColor="@color/grey"
-                android:textSize="@dimen/equip_desc" />
+        <FrameLayout
+            android:id="@+id/equipment_badge"
+            android:layout_width="@dimen/equip_badge"
+            android:layout_height="@dimen/equip_badge"
+            android:background="@drawable/bg_tip_badge"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        </LinearLayout>
-    </LinearLayout>
+            <ImageView
+                android:id="@+id/equipment_icon"
+                android:layout_width="@dimen/equip_badge_icon"
+                android:layout_height="@dimen/equip_badge_icon"
+                android:layout_gravity="center"
+                android:contentDescription="@null"
+                app:tint="@color/wine_maroon"
+                tools:src="@drawable/ic_gear_boots" />
+        </FrameLayout>
+
+        <View
+            android:layout_width="1.5dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:background="@color/history_divider"
+            app:layout_constraintBottom_toBottomOf="@id/equipment_badge"
+            app:layout_constraintStart_toEndOf="@id/equipment_badge"
+            app:layout_constraintTop_toTopOf="@id/equipment_badge" />
+
+        <TextView
+            android:id="@+id/equipment_title"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/equip_title_height"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/merriweathersans_bold"
+            android:maxLines="1"
+            android:textColor="@color/wine_maroon"
+            android:textSize="@dimen/equip_title"
+            app:autoSizeMaxTextSize="@dimen/equip_title"
+            app:autoSizeMinTextSize="11sp"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintEnd_toEndOf="@id/equipment_text_end"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/equipment_badge"
+            tools:text="Boots" />
+
+        <View
+            android:id="@+id/equipment_accent"
+            android:layout_width="@dimen/equip_accent_width"
+            android:layout_height="2.5dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_equipment_accent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/equipment_title" />
+
+        <TextView
+            android:id="@+id/equipment_instruction"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:letterSpacing="0.08"
+            android:lineSpacingMultiplier="1.2"
+            android:maxLines="2"
+            android:textAllCaps="true"
+            android:textColor="@color/grey"
+            android:textSize="@dimen/equip_desc"
+            app:layout_constraintEnd_toEndOf="@id/equipment_text_end"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/equipment_accent"
+            tools:text="@string/equipment_instruction" />
+
+        <ImageView
+            android:id="@+id/equipment_chevron"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_chevron_right"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/wine_maroon" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

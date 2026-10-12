@@ -3,24 +3,103 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.core.widget.NestedScrollView
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
         android:background="@color/ghost_white"
         tools:context=".Fragments.TipsScreenFragment">
 
+        <!-- Header stays on top, slides away when scrolling down and returns when scrolling up -->
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:stateListAnimator="@null"
+            app:elevation="0dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_scrollFlags="scroll|enterAlways|snap">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/header_art"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/history_header_height"
+                android:background="@color/wine_maroon"
+                android:contentDescription="@null"
+                android:scaleType="matrix"
+                android:src="@drawable/bg_home_hero_art"
+                app:shapeAppearanceOverlay="@style/HeroImageShape"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/btn_menu"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="20dp"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_menu"
+                app:layout_constraintBottom_toBottomOf="@id/img_avatar"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/img_avatar"
+                app:tint="@color/white" />
+
+            <TextView
+                android:id="@+id/txt_tips_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/merriweathersans_semibold"
+                android:gravity="center"
+                android:text="@string/menu_tips"
+                android:textColor="@color/white"
+                android:textSize="@dimen/home_title_text"
+                app:layout_constraintBottom_toBottomOf="@id/img_avatar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/img_avatar" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/img_avatar"
+                android:layout_width="@dimen/history_avatar"
+                android:layout_height="@dimen/history_avatar"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="16dp"
+                android:background="@color/blush"
+                android:contentDescription="@null"
+                android:padding="3dp"
+                android:src="@drawable/ic_snowboard_logo"
+                app:shapeAppearanceOverlay="@style/CircleImageStyle"
+                app:strokeColor="@color/white"
+                app:strokeWidth="2.5dp"
+                app:tint="@color/wine_maroon"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.appbar.AppBarLayout>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:clipToPadding="false"
-            android:padding="@dimen/recycler_padding"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            android:paddingStart="@dimen/start_end_margin"
+            android:paddingEnd="@dimen/start_end_margin"
+            android:paddingBottom="@dimen/history_footer_height"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
             tools:listitem="@layout/list_tips" />
 
-    </androidx.core.widget.NestedScrollView>
+        <!-- Forest stays pinned to the bottom while the cards scroll beneath it -->
+        <ImageView
+            android:id="@+id/footer_art"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/history_footer_height"
+            android:layout_gravity="bottom"
+            android:contentDescription="@null"
+            android:scaleType="centerCrop"
+            android:src="@drawable/bg_history_footer" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

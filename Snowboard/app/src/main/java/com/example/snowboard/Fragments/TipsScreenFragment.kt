@@ -1,11 +1,15 @@
 package com.example.snowboard.Fragments
 
+import android.graphics.Matrix
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
+import androidx.core.view.doOnLayout
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -28,6 +32,8 @@ class TipsScreenFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.btnMenu.setOnClickListener { openDrawer() }
+        cropHeaderArtToTop()
         dataInitialize()
 
         // 1. Setup the RecyclerView
@@ -58,6 +64,26 @@ class TipsScreenFragment : Fragment() {
         binding.recyclerView.adapter = tipsAdapter
     }
 
+    private fun openDrawer() {
+        requireActivity().findViewById<DrawerLayout>(R.id.drawerLayout)
+            ?.openDrawer(GravityCompat.START)
+    }
+
+    // Scale the art to fill the header and keep its dark sky behind the title
+    private fun cropHeaderArtToTop() {
+        binding.headerArt.doOnLayout { view ->
+            val art = binding.headerArt.drawable ?: return@doOnLayout
+            val scale = maxOf(
+                view.width.toFloat() / art.intrinsicWidth,
+                view.height.toFloat() / art.intrinsicHeight
+            )
+            binding.headerArt.imageMatrix = Matrix().apply {
+                setScale(scale, scale)
+                postTranslate((view.width - art.intrinsicWidth * scale) / 2f, 0f)
+            }
+        }
+    }
+
     override fun onResume() {
         super.onResume()
         // To HIDE the toolbar
@@ -77,7 +103,8 @@ class TipsScreenFragment : Fragment() {
             TipsList(
                 tipTitle = getString(R.string.title_detail_tip_1),
                 tipDescription = getString(R.string.description_detail_tip_1),
-                tipImage = R.drawable.ic_snowboard_logo
+                tipImage = R.drawable.ic_snowboard_logo,
+                tipIcon = R.drawable.ic_snowboarding
             )
         )
 
@@ -85,7 +112,8 @@ class TipsScreenFragment : Fragment() {
             TipsList(
                 tipTitle = getString(R.string.title_detail_tip_2),
                 tipDescription = getString(R.string.description_detail_tip_2),
-                tipImage = R.drawable.ic_snowboard_logo
+                tipImage = R.drawable.ic_snowboard_logo,
+                tipIcon = R.drawable.ic_equipment
             )
         )
 
@@ -93,7 +121,8 @@ class TipsScreenFragment : Fragment() {
             TipsList(
                 tipTitle = getString(R.string.title_detail_tip_3),
                 tipDescription = getString(R.string.description_detail_tip_3),
-                tipImage = R.drawable.ic_snowboard_logo
+                tipImage = R.drawable.ic_snowboard_logo,
+                tipIcon = R.drawable.ic_school
             )
         )
 
@@ -101,7 +130,8 @@ class TipsScreenFragment : Fragment() {
             TipsList(
                 tipTitle = getString(R.string.title_detail_tip_4),
                 tipDescription = getString(R.string.description_detail_tip_4),
-                tipImage = R.drawable.ic_snowboard_logo
+                tipImage = R.drawable.ic_snowboard_logo,
+                tipIcon = R.drawable.ic_eye
             )
         )
 
@@ -109,7 +139,8 @@ class TipsScreenFragment : Fragment() {
             TipsList(
                 tipTitle = getString(R.string.title_detail_tip_5),
                 tipDescription = getString(R.string.description_detail_tip_5),
-                tipImage = R.drawable.ic_snowboard_logo
+                tipImage = R.drawable.ic_snowboard_logo,
+                tipIcon = R.drawable.ic_stance
             )
         )
 
@@ -117,7 +148,8 @@ class TipsScreenFragment : Fragment() {
             TipsList(
                 tipTitle = getString(R.string.title_detail_tip_6),
                 tipDescription = getString(R.string.description_detail_tip_6),
-                tipImage = R.drawable.ic_snowboard_logo
+                tipImage = R.drawable.ic_snowboard_logo,
+                tipIcon = R.drawable.ic_mountain
             )
         )
 
@@ -125,7 +157,8 @@ class TipsScreenFragment : Fragment() {
             TipsList(
                 tipTitle = getString(R.string.title_detail_tip_7),
                 tipDescription = getString(R.string.description_detail_tip_7),
-                tipImage = R.drawable.ic_snowboard_logo
+                tipImage = R.drawable.ic_snowboard_logo,
+                tipIcon = R.drawable.ic_flag_hill
             )
         )
 
@@ -133,7 +166,8 @@ class TipsScreenFragment : Fragment() {
             TipsList(
                 tipTitle = getString(R.string.title_detail_tip_8),
                 tipDescription = getString(R.string.description_detail_tip_8),
-                tipImage = R.drawable.ic_snowboard_logo
+                tipImage = R.drawable.ic_snowboard_logo,
+                tipIcon = R.drawable.ic_shield
             )
         )
 
@@ -141,7 +175,8 @@ class TipsScreenFragment : Fragment() {
             TipsList(
                 tipTitle = getString(R.string.title_detail_tip_9),
                 tipDescription = getString(R.string.description_detail_tip_9),
-                tipImage = R.drawable.ic_snowboard_logo
+                tipImage = R.drawable.ic_snowboard_logo,
+                tipIcon = R.drawable.ic_hourglass
             )
         )
 
@@ -149,7 +184,8 @@ class TipsScreenFragment : Fragment() {
             TipsList(
                 tipTitle = getString(R.string.title_detail_tip_10),
                 tipDescription = getString(R.string.description_detail_tip_10),
-                tipImage = R.drawable.ic_snowboard_logo
+                tipImage = R.drawable.ic_snowboard_logo,
+                tipIcon = R.drawable.ic_heart_outline
             )
         )
     }
