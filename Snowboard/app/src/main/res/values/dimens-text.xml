@@ -13,7 +13,9 @@
     <dimen name="video_title">23sp</dimen>
     <dimen name="equip_title">16sp</dimen>
     <dimen name="tip_title">23sp</dimen>
-    <dimen name="ski_title">23sp</dimen>
+    <dimen name="ski_title">22sp</dimen>
+    <dimen name="ski_desc">14sp</dimen>
+    <dimen name="ski_link">15sp</dimen>
     <dimen name="header_title">16sp</dimen>
 
     //Desc - Info

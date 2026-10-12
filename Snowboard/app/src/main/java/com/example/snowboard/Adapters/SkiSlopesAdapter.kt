@@ -1,5 +1,10 @@
 package com.example.snowboard.Adapters
 
+import android.content.Intent
+import android.net.Uri
+import android.text.Spanned
+import android.text.method.LinkMovementMethod
+import android.text.style.URLSpan
 import android.transition.AutoTransition
 import android.transition.TransitionManager
 import android.view.LayoutInflater
@@ -7,7 +12,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.snowboard.Constants.Constants
@@ -30,18 +34,25 @@ class SkiSlopesAdapter(private val skiSlopesList: List<SkiSlopesList>) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentItem = skiSlopesList[position]
 
-        setItemColors(holder)
-
         holder.imageResort.setImageResource(currentItem.imgResort)
         holder.textTitle.text = currentItem.title
         holder.textDescription.text = currentItem.description
         holder.imageSkiSlopes.setImageResource(currentItem.imgSkiSlopes)
-        holder.textLink.text = currentItem.link
 
-        // 1. Set initial visibility of description
-        holder.textDescription.visibility = if (currentItem.isExpanded) View.VISIBLE else View.GONE
-        holder.imageSkiSlopes.visibility = if (currentItem.isExpanded) View.VISIBLE else View.GONE
-        holder.textLink.visibility = if (currentItem.isExpanded) View.VISIBLE else View.GONE
+        // The link string is HTML, so render it and make the link open the browser
+        val link = HtmlCompat.fromHtml(currentItem.link.trim(), HtmlCompat.FROM_HTML_MODE_LEGACY)
+        holder.textLink.text = link
+        holder.textLink.movementMethod = LinkMovementMethod.getInstance()
+
+        // Tapping anywhere on the row opens the same link
+        holder.linkRow.setOnClickListener { view ->
+            firstUrl(link)?.let { url ->
+                view.context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+            }
+        }
+
+        // 1. Set initial visibility of the expanded content
+        setExpandedVisibility(holder, currentItem.isExpanded)
 
         // 2. Set the initial rotation of the arrow (180 degrees if expanded, 0 if collapsed)
         holder.arrowButton.rotation = if (currentItem.isExpanded) 180f else 0f
@@ -53,19 +64,9 @@ class SkiSlopesAdapter(private val skiSlopesList: List<SkiSlopesList>) :
 
             // Animate the card expanding/collapsing
             TransitionManager.beginDelayedTransition(holder.cardView, AutoTransition())
-            holder.textDescription.visibility =
-                if (currentItem.isExpanded) View.VISIBLE else View.GONE
-            holder.imageSkiSlopes.visibility =
-                if (currentItem.isExpanded) View.VISIBLE else View.GONE
-            holder.textLink.visibility =
-                if (currentItem.isExpanded) View.VISIBLE else View.GONE
+            setExpandedVisibility(holder, currentItem.isExpanded)
 
-            val linkHtml = currentItem.link
-            holder.textLink.text = HtmlCompat.fromHtml(linkHtml, HtmlCompat.FROM_HTML_MODE_LEGACY)
-            // CRITICAL: This makes the link actually open the browser when clicked
-            holder.textLink.movementMethod = android.text.method.LinkMovementMethod.getInstance()
-
-            // 3. Animate the arrow flipping!
+            // Animate the arrow flipping!
             val targetRotation = if (currentItem.isExpanded) 180f else 0f
             holder.arrowButton.animate()
                 .rotation(targetRotation)
@@ -78,23 +79,24 @@ class SkiSlopesAdapter(private val skiSlopesList: List<SkiSlopesList>) :
         return skiSlopesList.size
     }
 
+    private fun setExpandedVisibility(holder: ViewHolder, isExpanded: Boolean) {
+        val visibility = if (isExpanded) View.VISIBLE else View.GONE
+        holder.textDescription.visibility = visibility
+        holder.imageSkiSlopes.visibility = visibility
+        holder.linkRow.visibility = visibility
+    }
+
+    private fun firstUrl(text: Spanned): String? =
+        text.getSpans(0, text.length, URLSpan::class.java).firstOrNull()?.url
+
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imageResort: ShapeableImageView = itemView.findViewById(R.id.imgResort)
         val textTitle: TextView = itemView.findViewById(R.id.titleSkiSlopes)
         val textDescription: TextView = itemView.findViewById(R.id.descriptionSkiSlopes)
         val imageSkiSlopes: ImageView = itemView.findViewById(R.id.imgSkiSlopes)
         val textLink: TextView = itemView.findViewById(R.id.linkSkiSlopes)
+        val linkRow: MaterialCardView = itemView.findViewById(R.id.ski_link_row)
         val cardView: MaterialCardView = itemView.findViewById(R.id.ski_slopes_cardView)
         val arrowButton: ImageView = itemView.findViewById(R.id.arrow_button)
-    }
-
-    private fun setItemColors(holder: ViewHolder) {
-        val colorTitle = ContextCompat.getColor(holder.itemView.context, R.color.midnight)
-        val colorDesc = ContextCompat.getColor(holder.itemView.context, R.color.shadow_black)
-        holder.apply {
-            textTitle.setTextColor(colorTitle)
-            textDescription.setTextColor(colorDesc)
-            textLink.setTextColor(colorDesc)
-        }
     }
 }

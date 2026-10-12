@@ -7,8 +7,6 @@
     <dimen name="close_btn_detail">48dp</dimen>
     <dimen name="spacing">4dp</dimen>
     <dimen name="history_logo">50dp</dimen>
-    <dimen name="list_img">110dp</dimen>
-    <dimen name="arrow_down">32dp</dimen>
     <dimen name="header_mer_pad">16dp</dimen>
     <dimen name="header_img_profile">64dp</dimen>
     <dimen name="nav_row_height">46dp</dimen>
@@ -32,7 +30,6 @@
     <dimen name="layout_box_height">88dp</dimen>
     <dimen name="history_img">250dp</dimen>
     <dimen name="main_logo">450dp</dimen>
-    <dimen name="ski_map">300dp</dimen>
     <dimen name="header_layout">188dp</dimen>
 
     //Margin
@@ -50,8 +47,6 @@
     <dimen name="start_end_btn">30dp</dimen>
     <dimen name="list_margin">5dp</dimen>
     <dimen name="tip_start_end">20dp</dimen>
-    <dimen name="info_ski_top">16dp</dimen>
-    <dimen name="ski_title_top">20dp</dimen>
 
     //Padding
     <dimen name="ic_padding">15dp</dimen>
@@ -89,6 +84,10 @@
     <dimen name="equip_badge_icon">24dp</dimen>
     <dimen name="equip_accent_width">22dp</dimen>
     <dimen name="equip_title_height">24dp</dimen>
+    <dimen name="ski_resort_img">110dp</dimen>
+    <dimen name="ski_pin">22dp</dimen>
+    <dimen name="ski_arrow">28dp</dimen>
+    <dimen name="ski_accent_width">30dp</dimen>
     <dimen name="home_card_corner_lg">12dp</dimen>
     <dimen name="home_quick_icon">48dp</dimen>
     <dimen name="home_nearby_card_width">156dp</dimen>
