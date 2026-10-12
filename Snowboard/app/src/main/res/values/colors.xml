@@ -32,4 +32,5 @@
     <color name="history_card_header">#F7E0E7</color>
     <color name="history_body_text">#3E3B4F</color>
     <color name="history_divider">#80720423</color>
+    <color name="ski_link_row">#B3F7E0E7</color>
 </resources>

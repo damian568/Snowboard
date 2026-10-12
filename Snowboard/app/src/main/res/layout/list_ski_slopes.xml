@@ -1,89 +1,206 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/ski_slopes_cardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/list_margin"
-    app:cardBackgroundColor="@color/blush"
-    app:cardCornerRadius="@dimen/card_corner"
-    app:cardElevation="@dimen/elevation"
-    app:contentPadding="@dimen/content_padding">
+    android:layout_marginTop="@dimen/history_card_gap"
+    app:cardBackgroundColor="@color/history_card"
+    app:cardCornerRadius="@dimen/history_card_corner"
+    app:cardElevation="0dp"
+    app:strokeWidth="0dp">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="@dimen/contain_margin">
+        android:layout_height="wrap_content">
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/imgResort"
-            android:layout_width="@dimen/list_img"
-            android:layout_height="@dimen/list_img"
-            android:layout_marginEnd="@dimen/contain_margin"
-            android:src="@drawable/bansko_resort"
+        <!-- Faded forest behind the whole card, purely decorative.
+             adjustViewBounds + maxHeight="0dp" keep it from sizing the card; it then fills whatever height the content sets -->
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0.3"
+            android:contentDescription="@null"
+            android:importantForAccessibility="no"
             android:scaleType="centerCrop"
-            app:shapeAppearanceOverlay="@style/RoundedImageStyle"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/titleSkiSlopes"
-            android:layout_width="@dimen/no_dimen"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/ski_title_top"
-            android:layout_toEndOf="@id/imgResort"
-            android:text="Bend Your Knees"
-            android:textColor="@color/midnight"
-            android:textSize="@dimen/ski_title"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@id/imgResort"
-            app:layout_constraintHorizontal_bias="0"
-            app:layout_constraintLeft_toRightOf="@id/imgResort"
-            app:layout_constraintRight_toLeftOf="@id/arrow_button"
-            app:layout_constraintTop_toTopOf="@id/imgResort" />
-
-        <ImageView
-            android:id="@+id/arrow_button"
-            android:layout_width="@dimen/arrow_down"
-            android:layout_height="@dimen/arrow_down"
-            android:layout_marginEnd="@dimen/contain_margin"
-            android:src="@drawable/ic_arrow"
-            app:layout_constraintBottom_toBottomOf="@id/titleSkiSlopes"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@id/titleSkiSlopes"
-            app:tint="@color/midnight" />
-
-        <TextView
-            android:id="@+id/descriptionSkiSlopes"
-            android:layout_width="@dimen/no_dimen"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/info_ski_top"
-            android:text="Here is the detailed tip about bending your knees while snowboarding..."
-            android:visibility="gone"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/imgResort" />
-
-        <ImageView
-            android:id="@+id/imgSkiSlopes"
-            android:layout_width="@dimen/no_dimen"
-            android:layout_height="@dimen/ski_map"
-            android:layout_marginTop="@dimen/info_ski_top"
             android:adjustViewBounds="true"
-            android:scaleType="fitCenter"
-            android:visibility="gone"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/descriptionSkiSlopes" />
+            android:maxHeight="0dp"
+            android:src="@drawable/bg_history_footer" />
 
-        <TextView
-            android:id="@+id/linkSkiSlopes"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/info_ski_top"
-            android:text="Here is the detailed tip about bending your knees while snowboarding..."
-            android:visibility="gone"
-            app:layout_constraintTop_toBottomOf="@id/imgSkiSlopes" />
+            android:padding="14dp">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imgResort"
+                android:layout_width="@dimen/ski_resort_img"
+                android:layout_height="@dimen/ski_resort_img"
+                android:contentDescription="@null"
+                android:scaleType="centerCrop"
+                app:shapeAppearanceOverlay="@style/RoundedImageStyle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/bansko_resort" />
+
+            <View
+                android:id="@+id/ski_divider"
+                android:layout_width="1.5dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="14dp"
+                android:background="@color/history_divider"
+                app:layout_constraintBottom_toBottomOf="@id/imgResort"
+                app:layout_constraintStart_toEndOf="@id/imgResort"
+                app:layout_constraintTop_toTopOf="@id/imgResort" />
+
+            <ImageView
+                android:id="@+id/ski_pin"
+                android:layout_width="@dimen/ski_pin"
+                android:layout_height="@dimen/ski_pin"
+                android:layout_marginStart="14dp"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_location"
+                app:layout_constraintBottom_toBottomOf="@id/titleSkiSlopes"
+                app:layout_constraintStart_toEndOf="@id/ski_divider"
+                app:layout_constraintTop_toTopOf="@id/titleSkiSlopes"
+                app:tint="@color/wine_maroon" />
+
+            <TextView
+                android:id="@+id/titleSkiSlopes"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="8dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/merriweathersans_bold"
+                android:maxLines="1"
+                android:textColor="@color/wine_maroon"
+                android:textSize="@dimen/ski_title"
+                app:layout_constraintEnd_toStartOf="@id/arrow_button"
+                app:layout_constraintStart_toEndOf="@id/ski_pin"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Bansko" />
+
+            <ImageView
+                android:id="@+id/arrow_button"
+                android:layout_width="@dimen/ski_arrow"
+                android:layout_height="@dimen/ski_arrow"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_chevron_down"
+                app:layout_constraintBottom_toBottomOf="@id/titleSkiSlopes"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/titleSkiSlopes"
+                app:tint="@color/wine_maroon" />
+
+            <View
+                android:id="@+id/ski_accent"
+                android:layout_width="@dimen/ski_accent_width"
+                android:layout_height="3dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_equipment_accent"
+                app:layout_constraintStart_toStartOf="@id/ski_pin"
+                app:layout_constraintTop_toBottomOf="@id/titleSkiSlopes" />
+
+            <TextView
+                android:id="@+id/descriptionSkiSlopes"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:lineSpacingMultiplier="1.25"
+                android:textColor="@color/history_body_text"
+                android:textSize="@dimen/ski_desc"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/ski_pin"
+                app:layout_constraintTop_toBottomOf="@id/ski_accent"
+                tools:text="The largest ski resort in Bulgaria, known for modern lifts, long slopes, and a lively atmosphere."
+                tools:visibility="visible" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/ski_header_bottom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="imgResort,descriptionSkiSlopes" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imgSkiSlopes"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:adjustViewBounds="true"
+                android:contentDescription="@null"
+                android:scaleType="fitCenter"
+                android:visibility="gone"
+                app:shapeAppearanceOverlay="@style/RoundedImageStyle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ski_header_bottom"
+                tools:src="@drawable/bansko"
+                tools:visibility="visible" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/ski_link_row"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:visibility="gone"
+                app:cardBackgroundColor="@color/ski_link_row"
+                app:cardCornerRadius="@dimen/tip_badge_corner"
+                app:cardElevation="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/imgSkiSlopes"
+                app:strokeWidth="0dp"
+                tools:visibility="visible">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="14dp">
+
+                    <ImageView
+                        android:layout_width="@dimen/ski_pin"
+                        android:layout_height="@dimen/ski_pin"
+                        android:contentDescription="@null"
+                        android:src="@drawable/ic_location"
+                        app:tint="@color/wine_maroon" />
+
+                    <TextView
+                        android:id="@+id/linkSkiSlopes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:textColor="@color/history_body_text"
+                        android:textColorLink="@color/crimson_red"
+                        android:textSize="@dimen/ski_link"
+                        tools:text="Bansko: Sourcing Link" />
+
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_marginStart="6dp"
+                        android:contentDescription="@null"
+                        android:src="@drawable/ic_open_in_new"
+                        app:tint="@color/crimson_red" />
+
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
+                    <ImageView
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:contentDescription="@null"
+                        android:src="@drawable/ic_chevron_right"
+                        app:tint="@color/wine_maroon" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
 </com.google.android.material.card.MaterialCardView>
