@@ -25,6 +25,22 @@ plugins {
     id 'org.jetbrains.kotlin.plugin.serialization' version '2.1.0' apply false
 }
 
+// Point git at the shared hooks in <repo>/.githooks (commit message validation, SNOW-69).
+// Runs on every Gradle sync/build so fresh clones get the hooks without manual setup.
+def gitHooksDir = new File(rootDir.parentFile, '.githooks')
+if (gitHooksDir.isDirectory() && System.getenv('CI') == null) {
+    try {
+        gitHooksDir.listFiles().each { it.setExecutable(true) }
+        def current = ['git', 'config', '--get', 'core.hooksPath'].execute(null, rootDir).text.trim()
+        if (current != '.githooks') {
+            ['git', 'config', 'core.hooksPath', '.githooks'].execute(null, rootDir).waitFor()
+            logger.lifecycle('Git hooks installed from .githooks')
+        }
+    } catch (Exception e) {
+        logger.warn("Could not install git hooks: ${e.message}")
+    }
+}
+
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
