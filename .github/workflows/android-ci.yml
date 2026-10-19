@@ -12,6 +12,46 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  # Every commit in a PR must follow "SNOW-<number> <Description>" (SNOW-69).
+  # Same rules as the local hook in .githooks/commit-msg.
+  commit-messages:
+    name: Commit message format
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # full history, to list the PR's commits
+
+      - name: Check commit messages
+        env:
+          BASE_REF: ${{ github.base_ref }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          # Fail loudly if the commit range can't be resolved, instead of checking nothing
+          shas=$(git rev-list --no-merges "origin/$BASE_REF..$HEAD_SHA") || exit 1
+          bad=0
+          for sha in $shas; do
+            subject=$(git log -1 --format=%s "$sha")
+            if echo "$subject" | grep -qE '^(Revert|fixup!|squash!|amend!) '; then
+              continue
+            fi
+            if ! echo "$subject" | grep -qE '^SNOW-[0-9]+ [A-Z].{4,}$'; then
+              echo "::error::${sha:0:7} \"$subject\" — expected: SNOW-<number> <Description>"
+              bad=1
+            elif [ ${#subject} -gt 72 ]; then
+              echo "::error::${sha:0:7} \"$subject\" — subject is ${#subject} characters, the limit is 72"
+              bad=1
+            fi
+          done
+          if [ $bad -eq 0 ]; then
+            echo "✔ All commit messages follow the SNOW-<number> <Description> format"
+          fi
+          exit $bad
+
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 30
