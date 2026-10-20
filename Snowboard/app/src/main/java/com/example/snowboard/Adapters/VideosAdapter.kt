@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.Lifecycle
 import androidx.recyclerview.widget.RecyclerView
 import com.example.snowboard.Lists.VideosList
@@ -35,8 +34,6 @@ class VideosAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentItem = videosList[position]
-
-        setItemColors(holder)
 
         holder.titleVideos.text = currentItem.title
         holder.descriptionVideos.text = currentItem.description
@@ -105,14 +102,5 @@ class VideosAdapter(
         val descriptionVideos: TextView = itemView.findViewById(R.id.descriptionVideos)
         var isInitialized = false
         var youtubePlayer: YouTubePlayer? = null
-    }
-
-    private fun setItemColors(holder: ViewHolder) {
-        val colorTitle = ContextCompat.getColor(holder.itemView.context, R.color.midnight)
-        val colorDesc = ContextCompat.getColor(holder.itemView.context, R.color.shadow_black)
-        holder.apply {
-            titleVideos.setTextColor(colorTitle)
-            descriptionVideos.setTextColor(colorDesc)
-        }
     }
 }
