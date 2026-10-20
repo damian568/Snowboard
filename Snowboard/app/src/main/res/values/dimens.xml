@@ -76,6 +76,9 @@
     <dimen name="tip_badge_corner">14dp</dimen>
     <dimen name="tip_card_title">17sp</dimen>
     <dimen name="tip_card_body">13sp</dimen>
+    <dimen name="video_frame_corner">14dp</dimen>
+    <dimen name="video_badge">50dp</dimen>
+    <dimen name="video_badge_icon">28dp</dimen>
     <dimen name="equip_card_height">150dp</dimen>
     <dimen name="equip_card_gap">12dp</dimen>
     <dimen name="equip_card_gap_half">6dp</dimen>

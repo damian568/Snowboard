@@ -1,49 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/list_margin"
-    app:cardBackgroundColor="@color/blush"
-    app:cardCornerRadius="@dimen/card_corner"
-    app:cardElevation="@dimen/elevation"
-    app:contentPadding="@dimen/content_padding">
+    android:layout_marginTop="@dimen/history_card_gap"
+    app:cardBackgroundColor="@color/history_card"
+    app:cardCornerRadius="@dimen/history_card_corner"
+    app:cardElevation="0dp"
+    app:strokeWidth="0dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="@dimen/contain_margin">
+        android:layout_height="wrap_content"
+        android:padding="10dp">
 
-        <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
-            android:id="@+id/webVideos"
-            android:layout_width="match_parent"
+        <!-- Rounded frame clips the player to the card's corners -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/video_frame"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/contain_margin"
-            android:importantForAccessibility="no"
-            app:enableAutomaticInitialization="false"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:cardBackgroundColor="@color/wine_maroon"
+            app:cardCornerRadius="@dimen/video_frame_corner"
+            app:cardElevation="0dp"
+            app:strokeWidth="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+                android:id="@+id/webVideos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:importantForAccessibility="no"
+                app:enableAutomaticInitialization="false" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <FrameLayout
+            android:id="@+id/video_badge"
+            android:layout_width="@dimen/video_badge"
+            android:layout_height="@dimen/video_badge"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/bg_video_badge"
+            app:layout_constraintBottom_toBottomOf="@id/descriptionVideos"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/titleVideos">
+
+            <ImageView
+                android:layout_width="@dimen/video_badge_icon"
+                android:layout_height="@dimen/video_badge_icon"
+                android:layout_gravity="center"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_ondemand_video"
+                app:tint="@color/white" />
+        </FrameLayout>
+
+        <View
+            android:id="@+id/video_divider"
+            android:layout_width="1.5dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="14dp"
+            android:background="@color/history_divider"
+            app:layout_constraintBottom_toBottomOf="@id/descriptionVideos"
+            app:layout_constraintStart_toEndOf="@id/video_badge"
+            app:layout_constraintTop_toTopOf="@id/titleVideos" />
 
         <TextView
             android:id="@+id/titleVideos"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Bend Your Knees"
-            android:textColor="@color/midnight"
-            android:textSize="@dimen/video_title"
-            android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@id/webVideos"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/descriptionVideos" />
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginEnd="8dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/merriweathersans_bold"
+            android:maxLines="2"
+            android:textColor="@color/wine_maroon"
+            android:textSize="@dimen/tip_card_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/video_divider"
+            app:layout_constraintTop_toBottomOf="@id/video_frame"
+            tools:text="Why Riding Duck Foot Is Holding You Back" />
 
         <TextView
             android:id="@+id/descriptionVideos"
-            android:layout_width="@dimen/no_dimen"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Here is the detailed tip about bending your knees while snowboarding..."
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/titleVideos" />
-
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="8dp"
+            android:lineSpacingMultiplier="1.25"
+            android:textColor="@color/history_body_text"
+            android:textSize="@dimen/tip_card_body"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/titleVideos"
+            app:layout_constraintStart_toStartOf="@id/titleVideos"
+            app:layout_constraintTop_toBottomOf="@id/titleVideos"
+            tools:text="Shows why angle of the duck foot is important" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

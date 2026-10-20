@@ -180,7 +180,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun behaviorBottomAppBar(destination: NavDestination) {
         when (destination.id) {
-            R.id.splashScreenFragment, R.id.mainScreenFragment, R.id.historyScreenFragment, R.id.tipsScreenFragment, R.id.equipmentScreenFragment, R.id.skiSlopesScreenFragment, R.id.tipDetailFragment, R.id.loginScreenFragment, R.id.registerScreenFragment, R.id.profileScreenFragment, R.id.personalInformationFragment, R.id.settingsFragment, R.id.helpSupportFragment, R.id.changePasswordScreenFragment, R.id.changeEmailScreenFragment -> {
+            R.id.splashScreenFragment, R.id.mainScreenFragment, R.id.historyScreenFragment, R.id.tipsScreenFragment, R.id.equipmentScreenFragment, R.id.skiSlopesScreenFragment, R.id.videosScreenFragment, R.id.tipDetailFragment, R.id.loginScreenFragment, R.id.registerScreenFragment, R.id.profileScreenFragment, R.id.personalInformationFragment, R.id.settingsFragment, R.id.helpSupportFragment, R.id.changePasswordScreenFragment, R.id.changeEmailScreenFragment -> {
                 binding.bottomAppBar.visibility = View.GONE
                 binding.fab.hide()
             }
