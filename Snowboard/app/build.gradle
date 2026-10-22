@@ -9,6 +9,18 @@ plugins {
     id 'com.google.gms.google-services'
 }
 
+// OpenWeather API key: read from local.properties (gitignored), or the WEATHER_API_KEY env var on CI.
+// See README.md for setup.
+def localProps = new Properties()
+def localPropsFile = rootProject.file('local.properties')
+if (localPropsFile.exists()) {
+    localPropsFile.withInputStream { localProps.load(it) }
+}
+def weatherApiKey = localProps.getProperty('WEATHER_API_KEY') ?: System.getenv('WEATHER_API_KEY') ?: ''
+if (weatherApiKey.isEmpty()) {
+    logger.warn('WEATHER_API_KEY is not set in local.properties - weather data will not load. See README.md.')
+}
+
 android {
     namespace 'com.example.snowboard'
     compileSdk 34
@@ -21,6 +33,8 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField "String", "WEATHER_API_KEY", "\"${weatherApiKey}\""
     }
 
     buildTypes {
@@ -28,6 +42,10 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+
+    buildFeatures {
+        buildConfig = true
     }
 
     dataBinding {

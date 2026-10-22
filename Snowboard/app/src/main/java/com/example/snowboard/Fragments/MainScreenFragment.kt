@@ -16,7 +16,7 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.example.snowboard.Constants.Constants
+import com.example.snowboard.BuildConfig
 import com.example.snowboard.Interface.WeatherApiService
 import com.example.snowboard.Lists.NearbySlopeData
 import com.example.snowboard.Lists.NearbySlopeList
@@ -277,7 +277,7 @@ class MainScreenFragment : Fragment() {
                 val response = weatherService.getCurrentWeather(
                     lat,
                     lon,
-                    Constants.API_KEY,
+                    BuildConfig.WEATHER_API_KEY,
                     if (useMetric) "metric" else "imperial",
                     currentLang
                 )
