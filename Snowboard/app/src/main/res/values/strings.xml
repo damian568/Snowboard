@@ -401,7 +401,16 @@
     <string name="error_email_required">Please enter your email</string>
     <string name="error_email_invalid">Please enter a valid email</string>
     <string name="error_password_required">Please enter your password</string>
-    <string name="error_password_too_short">Password must be at least 6 characters</string>
+    <string name="error_password_too_short">Password must be at least 8 characters</string>
+    <string name="error_password_no_uppercase">Password must contain at least one uppercase letter</string>
+    <string name="error_password_no_lowercase">Password must contain at least one lowercase letter</string>
+    <string name="error_password_no_number">Password must contain at least one number</string>
+    <string name="error_password_no_symbol">Password must contain at least one symbol</string>
+    <string name="password_rule_length">At least 8 characters</string>
+    <string name="password_rule_uppercase">One uppercase letter</string>
+    <string name="password_rule_lowercase">One lowercase letter</string>
+    <string name="password_rule_number">One number</string>
+    <string name="password_rule_symbol">One symbol (e.g. ! @ # $)</string>
     <string name="error_password_mismatch">Passwords do not match</string>
     <string name="error_email_already_in_use">An account with this email already exists</string>
     <string name="msg_verification_email_sent">A verification email has been sent to %1$s. Please verify your email.</string>

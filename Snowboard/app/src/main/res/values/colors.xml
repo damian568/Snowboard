@@ -26,6 +26,8 @@
     <color name="blush_deep">#E3D0C9</color>
     <color name="pearl_background">#F9F7F8</color>
     <color name="field_stroke">#E0DCDC</color>
+    <color name="password_rule_met">#2E7D32</color>
+    <color name="password_rule_unmet">#D32F2F</color>
 
     <!-- History -->
     <color name="history_card">#E6F7EEF1</color>
