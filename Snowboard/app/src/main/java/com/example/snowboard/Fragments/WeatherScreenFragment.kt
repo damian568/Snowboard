@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.lifecycleScope
-import com.example.snowboard.Constants.Constants
+import com.example.snowboard.BuildConfig
 import com.example.snowboard.Interface.WeatherApiService
 import com.example.snowboard.R
 import com.example.snowboard.Response.WeatherResponse
@@ -117,7 +117,7 @@ class WeatherScreenFragment : Fragment() {
                 val response = weatherService.getCurrentWeather(
                     lat,
                     lon,
-                    Constants.API_KEY,
+                    BuildConfig.WEATHER_API_KEY,
                     if (useMetric) "metric" else "imperial",
                     currentLang
                 )
