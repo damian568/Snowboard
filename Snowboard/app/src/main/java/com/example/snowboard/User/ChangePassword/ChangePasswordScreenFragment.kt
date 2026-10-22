@@ -12,6 +12,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.snowboard.R
+import com.example.snowboard.User.PasswordRequirements
+import com.example.snowboard.User.PasswordValidator
 import com.example.snowboard.databinding.FragmentChangePasswordScreenBinding
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
@@ -54,6 +56,13 @@ class ChangePasswordScreenFragment : Fragment() {
             )
         }
 
+        PasswordRequirements.attach(
+            binding.editNewPassword, binding.passwordRequirements, binding.passwordStrongIcon
+        )
+        PasswordRequirements.attachMatch(
+            binding.editNewPassword, binding.editConfirmNewPassword, binding.passwordMatchIcon
+        )
+
         binding.btnChangePassword.setOnClickListener { attemptChangePassword() }
     }
 
@@ -85,8 +94,8 @@ class ChangePasswordScreenFragment : Fragment() {
             binding.editNewPassword.error = getString(R.string.error_new_password_required)
             return
         }
-        if (newPassword.length < 6) {
-            binding.editNewPassword.error = getString(R.string.error_password_too_short)
+        PasswordValidator.validate(newPassword)?.let { errorRes ->
+            binding.editNewPassword.error = getString(errorRes)
             return
         }
         if (newPassword == currentPassword) {

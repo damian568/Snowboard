@@ -15,6 +15,8 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.snowboard.R
 import com.example.snowboard.User.Model.UserProfile
+import com.example.snowboard.User.PasswordRequirements
+import com.example.snowboard.User.PasswordValidator
 import com.example.snowboard.User.SocialAuthHelper
 import com.example.snowboard.databinding.FragmentRegisterScreenBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -86,6 +88,13 @@ class RegisterScreenFragment : Fragment() {
             binding.editConfirmPassword.setSelection(cursorPosition)
         }
 
+        PasswordRequirements.attach(
+            binding.editPassword, binding.passwordRequirements, binding.passwordStrongIcon
+        )
+        PasswordRequirements.attachMatch(
+            binding.editPassword, binding.editConfirmPassword, binding.passwordMatchIcon
+        )
+
         binding.levelBeginner.setOnClickListener { selectLevel(SkillLevel.BEGINNER) }
         binding.levelAdvance.setOnClickListener { selectLevel(SkillLevel.ADVANCE) }
 
@@ -125,8 +134,8 @@ class RegisterScreenFragment : Fragment() {
             binding.editPassword.error = getString(R.string.error_password_required)
             return
         }
-        if (password.length < 6) {
-            binding.editPassword.error = getString(R.string.error_password_too_short)
+        PasswordValidator.validate(password)?.let { errorRes ->
+            binding.editPassword.error = getString(errorRes)
             return
         }
         if (password != confirmPassword) {

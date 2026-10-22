@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.snowboard.R
@@ -153,5 +154,10 @@ class LoginScreenFragment : Fragment() {
         val action =
             LoginScreenFragmentDirections.actionLoginScreenFragmentToForgotPasswordScreenFragment()
         findNavController().navigate(action)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        (activity as? AppCompatActivity)?.supportActionBar?.hide()
     }
 }

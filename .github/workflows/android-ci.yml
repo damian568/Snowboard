@@ -78,6 +78,9 @@ jobs:
         run: chmod +x gradlew
 
       - name: Build debug APK
+        # Optional repo secret; the build still succeeds without it (weather just won't load in the APK)
+        env:
+          WEATHER_API_KEY: ${{ secrets.WEATHER_API_KEY }}
         run: ./gradlew assembleDebug --stacktrace
 
       - name: Run unit tests
