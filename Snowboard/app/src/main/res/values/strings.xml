@@ -114,6 +114,19 @@
     <string name="equipment_desc_detail_9">Base layers (thermal) – Help regulate body temperature and keep sweat away from your skin.</string>
     <string name="equipment_desc_detail_10">Snowboard socks – Designed for warmth, comfort, and better fit inside boots, reducing friction and blisters.</string>
 
+    <string name="equipment_top_brands">Top Brands</string>
+    <string name="equipment_visit_shop">Shop</string>
+    <string name="quote_detail_equipment_1">Pick the board that fits your ride!</string>
+    <string name="quote_detail_equipment_2">Locked in means in control!</string>
+    <string name="quote_detail_equipment_3">Comfy boots, longer days on the slopes!</string>
+    <string name="quote_detail_equipment_4">Protect your head, ride with confidence!</string>
+    <string name="quote_detail_equipment_5">See clearly, ride smarter!</string>
+    <string name="quote_detail_equipment_6">Stay warm, stay dry, keep riding!</string>
+    <string name="quote_detail_equipment_7">Dry legs, happy runs!</string>
+    <string name="quote_detail_equipment_8">Warm hands, strong grip!</string>
+    <string name="quote_detail_equipment_9">Great days start with the right layers!</string>
+    <string name="quote_detail_equipment_10">Happy feet start with the right socks!</string>
+
     //Brands
     //Snowboards
     <string name="brands_snowboards">

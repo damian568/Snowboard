@@ -50,6 +50,8 @@ class EquipmentScreenFragment : Fragment() {
             val bundle = Bundle().apply {
                 putInt("EQUIPMENT_IMAGE", selectedItem.equipmentImage)
                 putString("EQUIPMENT_TITLE", selectedItem.equipmentTitle)
+                putInt("EQUIPMENT_ICON", selectedItem.equipmentIcon)
+                putString("EQUIPMENT_QUOTE", selectedItem.equipmentQuote)
                 putString("TRANSITION_NAME", transitionName)
             }
 
@@ -102,7 +104,8 @@ class EquipmentScreenFragment : Fragment() {
                 R.drawable.snowboard_pic_equipment,
                 getString(R.string.equipment_title_1),
                 getString(R.string.equipment_instruction),
-                R.drawable.ic_gear_snowboard
+                R.drawable.ic_gear_snowboard,
+                getString(R.string.quote_detail_equipment_1)
             )
         )
         equipmentArrayList.add(
@@ -110,7 +113,8 @@ class EquipmentScreenFragment : Fragment() {
                 R.drawable.bindings_pic_equipment,
                 getString(R.string.equipment_title_2),
                 getString(R.string.equipment_instruction),
-                R.drawable.ic_gear_bindings
+                R.drawable.ic_gear_bindings,
+                getString(R.string.quote_detail_equipment_2)
             )
         )
         equipmentArrayList.add(
@@ -118,7 +122,8 @@ class EquipmentScreenFragment : Fragment() {
                 R.drawable.boots_pic_equipment,
                 getString(R.string.equipment_title_3),
                 getString(R.string.equipment_instruction),
-                R.drawable.ic_gear_boots
+                R.drawable.ic_gear_boots,
+                getString(R.string.quote_detail_equipment_3)
             )
         )
         equipmentArrayList.add(
@@ -126,7 +131,8 @@ class EquipmentScreenFragment : Fragment() {
                 R.drawable.helmet_pic_equipment,
                 getString(R.string.equipment_title_4),
                 getString(R.string.equipment_instruction),
-                R.drawable.ic_gear_helmet
+                R.drawable.ic_gear_helmet,
+                getString(R.string.quote_detail_equipment_4)
             )
         )
         equipmentArrayList.add(
@@ -134,7 +140,8 @@ class EquipmentScreenFragment : Fragment() {
                 R.drawable.goggles_pic_equipment,
                 getString(R.string.equipment_title_5),
                 getString(R.string.equipment_instruction),
-                R.drawable.ic_gear_goggles
+                R.drawable.ic_gear_goggles,
+                getString(R.string.quote_detail_equipment_5)
             )
         )
         equipmentArrayList.add(
@@ -142,7 +149,8 @@ class EquipmentScreenFragment : Fragment() {
                 R.drawable.jacket_pic_equipment,
                 getString(R.string.equipment_title_6),
                 getString(R.string.equipment_instruction),
-                R.drawable.ic_gear_jacket
+                R.drawable.ic_gear_jacket,
+                getString(R.string.quote_detail_equipment_6)
             )
         )
         equipmentArrayList.add(
@@ -150,7 +158,8 @@ class EquipmentScreenFragment : Fragment() {
                 R.drawable.pants_pic_equipment,
                 getString(R.string.equipment_title_7),
                 getString(R.string.equipment_instruction),
-                R.drawable.ic_gear_pants
+                R.drawable.ic_gear_pants,
+                getString(R.string.quote_detail_equipment_7)
             )
         )
         equipmentArrayList.add(
@@ -158,7 +167,8 @@ class EquipmentScreenFragment : Fragment() {
                 R.drawable.gloves_pic_equipment,
                 getString(R.string.equipment_title_8),
                 getString(R.string.equipment_instruction),
-                R.drawable.ic_gear_gloves
+                R.drawable.ic_gear_gloves,
+                getString(R.string.quote_detail_equipment_8)
             )
         )
         equipmentArrayList.add(
@@ -166,7 +176,8 @@ class EquipmentScreenFragment : Fragment() {
                 R.drawable.base_layers_pic_equipment,
                 getString(R.string.equipment_title_9),
                 getString(R.string.equipment_instruction),
-                R.drawable.ic_gear_base_layers
+                R.drawable.ic_gear_base_layers,
+                getString(R.string.quote_detail_equipment_9)
             )
         )
         equipmentArrayList.add(
@@ -174,7 +185,8 @@ class EquipmentScreenFragment : Fragment() {
                 R.drawable.socks_pic_equipment,
                 getString(R.string.equipment_title_10),
                 getString(R.string.equipment_instruction),
-                R.drawable.ic_gear_socks
+                R.drawable.ic_gear_socks,
+                getString(R.string.quote_detail_equipment_10)
             )
         )
     }

@@ -4,5 +4,6 @@ data class EquipmentList(
     val equipmentImage: Int,
     val equipmentTitle: String,
     val equipmentDescription: String,
-    val equipmentIcon: Int
+    val equipmentIcon: Int,
+    val equipmentQuote: String
 )
