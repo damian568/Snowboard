@@ -421,6 +421,13 @@
     <string name="change_profile_photo">Change profile photo</string>
     <string name="msg_avatar_upload_failed">Couldn\'t save your profile photo. Please try again.</string>
 
+    //FAB actions
+    <string name="add_tip">Add tip</string>
+    <string name="add_equipment">Add equipment</string>
+    <string name="add_ski_slope">Add ski slope</string>
+    <string name="add_video">Add video</string>
+    <string name="msg_coming_soon">%1$s — coming soon</string>
+
     //Auth Validation
     <string name="error_full_name_required">Please enter your full name</string>
     <string name="error_email_required">Please enter your email</string>

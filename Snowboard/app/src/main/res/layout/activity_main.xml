@@ -53,9 +53,13 @@
                 android:id="@+id/fab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:layout_margin="@dimen/start_end_margin"
+                android:contentDescription="@string/add_tip"
                 android:src="@drawable/ic_add"
-                android:visibility="visible"
-                app:layout_anchor="@id/bottomAppBar" />
+                android:visibility="gone"
+                app:backgroundTint="@color/crimson_red"
+                app:tint="@color/white" />
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

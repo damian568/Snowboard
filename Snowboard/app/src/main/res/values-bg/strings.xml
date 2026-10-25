@@ -373,4 +373,11 @@
     <string name="weather_sunrise">Изгрев</string>
     <string name="weather_sunset">Залез</string>
     <string name="weather_sea">Морско Равнище</string>
+
+    //FAB actions
+    <string name="add_tip">Добави съвет</string>
+    <string name="add_equipment">Добави екипировка</string>
+    <string name="add_ski_slope">Добави писта</string>
+    <string name="add_video">Добави видео</string>
+    <string name="msg_coming_soon">%1$s — очаквайте скоро</string>
 </resources>
