@@ -77,6 +77,17 @@
         \n \nAs a new rider, it’s normal to feel overwhelmed and unsure about yourself. Just remember, the only thing between where you are today and where the pros are is just how much time they’ve spent on the slopes.
         \n \nGet out there and start practicing, and you’ll be running up and down the slopes in no time.</string>
 
+    <string name="quote_detail_tip_1">The right board makes all the difference!</string>
+    <string name="quote_detail_tip_2">Happy feet, happy rider!</string>
+    <string name="quote_detail_tip_3">Learn it right from day one!</string>
+    <string name="quote_detail_tip_4">Your board goes where your eyes go!</string>
+    <string name="quote_detail_tip_5">Soft knees, solid control!</string>
+    <string name="quote_detail_tip_6">Carve the slope, control the speed!</string>
+    <string name="quote_detail_tip_7">Every pro started on the bunny hill!</string>
+    <string name="quote_detail_tip_8">Look up, stay safe, ride smart!</string>
+    <string name="quote_detail_tip_9">Master the basics, then go big!</string>
+    <string name="quote_detail_tip_10">Smile — you’re on a snowboard!</string>
+
     //Equipment Screen
     <string name="equipment_instruction">Click to see details</string>
     <string name="equipment_instruction_google">"Search for brands at &lt;a href='https://www.google.com'&gt;Google&lt;/a&gt;"</string>

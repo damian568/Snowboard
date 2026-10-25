@@ -35,4 +35,6 @@
     <color name="history_body_text">#3E3B4F</color>
     <color name="history_divider">#80720423</color>
     <color name="ski_link_row">#B3F7E0E7</color>
+    <!-- history_card as it renders over ghost_white, so the photo fade has no seam -->
+    <color name="tip_quote_fade">#F7EFF2</color>
 </resources>

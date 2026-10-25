@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <!-- Hidden on the first row -->
+    <View
+        android:id="@+id/section_separator"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginEnd="14dp"
+        android:background="@color/blush_deep" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="14dp">
+
+        <FrameLayout
+            android:id="@+id/section_badge"
+            android:layout_width="@dimen/tip_badge"
+            android:layout_height="@dimen/tip_badge"
+            android:background="@drawable/bg_tip_badge"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/section_icon"
+                android:layout_width="@dimen/tip_badge_icon"
+                android:layout_height="@dimen/tip_badge_icon"
+                android:layout_gravity="center"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_snowboarding"
+                app:tint="@color/wine_maroon" />
+        </FrameLayout>
+
+        <View
+            android:id="@+id/section_divider"
+            android:layout_width="1.5dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="14dp"
+            android:background="@color/history_divider"
+            app:layout_constraintBottom_toBottomOf="@id/section_body"
+            app:layout_constraintStart_toEndOf="@id/section_badge"
+            app:layout_constraintTop_toTopOf="@id/section_body" />
+
+        <TextView
+            android:id="@+id/section_body"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:lineSpacingMultiplier="1.3"
+            android:textColor="@color/history_body_text"
+            android:textSize="@dimen/tip_detail_body"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/section_divider"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="As a beginner, look for a board that has rocker camber." />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

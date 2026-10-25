@@ -4,5 +4,6 @@ data class TipsList(
     val tipTitle: String,
     val tipDescription: String,
     val tipImage: Int,
-    val tipIcon: Int
+    val tipIcon: Int,
+    val tipQuote: String
 )
