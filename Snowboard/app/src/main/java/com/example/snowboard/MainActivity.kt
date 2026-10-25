@@ -17,6 +17,8 @@ import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.bumptech.glide.Glide
+import com.example.snowboard.User.AvatarRepository
 import com.example.snowboard.User.Settings.AppPreferences
 import com.example.snowboard.databinding.ActivityMainBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -113,11 +115,13 @@ class MainActivity : AppCompatActivity() {
     private fun loadNavHeaderProfile() {
         val nameView = binding.navDrawerContent.findViewById<TextView>(R.id.txt_nav_header_name)
         val emailView = binding.navDrawerContent.findViewById<TextView>(R.id.txt_nav_header_email)
+        val avatarView = binding.navDrawerContent.findViewById<ImageView>(R.id.img_profile)
 
         val user = FirebaseAuth.getInstance().currentUser
         if (user == null) {
             nameView.text = ""
             emailView.text = ""
+            avatarView.setImageResource(R.mipmap.ic_icon)
             return
         }
 
@@ -129,6 +133,18 @@ class MainActivity : AppCompatActivity() {
                 val fullName = document.getString("fullName")
                 if (!fullName.isNullOrBlank()) {
                     nameView.text = fullName
+                }
+                if (isDestroyed) return@addOnSuccessListener
+                val avatarBytes = AvatarRepository.avatarBytes(document)
+                if (avatarBytes == null) {
+                    avatarView.setImageResource(R.mipmap.ic_icon)
+                } else {
+                    Glide.with(this)
+                        .load(avatarBytes)
+                        .centerCrop()
+                        .placeholder(R.mipmap.ic_icon)
+                        .error(R.mipmap.ic_icon)
+                        .into(avatarView)
                 }
             }
     }
