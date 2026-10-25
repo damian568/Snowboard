@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
@@ -49,6 +50,14 @@ class MainActivity : AppCompatActivity() {
             DrawerItem(R.id.weather, R.id.weather_accent, R.id.weather_icon, R.id.weather_text, R.id.weather_chevron, R.id.weatherScreenFragment)
         )
     }
+
+    // Screens that have a FAB action, mapped to what the FAB adds there
+    private val fabAddActions = mapOf(
+        R.id.tipsScreenFragment to R.string.add_tip,
+        R.id.equipmentDetailFragment to R.string.add_equipment,
+        R.id.skiSlopesScreenFragment to R.string.add_ski_slope,
+        R.id.videosScreenFragment to R.string.add_video
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AppCompatDelegate.setDefaultNightMode(
@@ -165,7 +174,24 @@ class MainActivity : AppCompatActivity() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             behaviorBottomAppBar(destination)
             updateSelectedDrawerItem(destination.id)
+            updateFab(destination.id)
         }
+    }
+
+    private fun updateFab(destinationId: Int) {
+        val addActionId = fabAddActions[destinationId]
+        if (addActionId == null) {
+            binding.fab.hide()
+            return
+        }
+
+        val addAction = getString(addActionId)
+        binding.fab.contentDescription = addAction
+        binding.fab.setOnClickListener {
+            // Placeholder until the add flows are built
+            Toast.makeText(this, getString(R.string.msg_coming_soon, addAction), Toast.LENGTH_SHORT).show()
+        }
+        binding.fab.show()
     }
 
     private fun updateSelectedDrawerItem(destinationId: Int) {
@@ -198,17 +224,10 @@ class MainActivity : AppCompatActivity() {
         when (destination.id) {
             R.id.splashScreenFragment, R.id.mainScreenFragment, R.id.historyScreenFragment, R.id.tipsScreenFragment, R.id.equipmentScreenFragment, R.id.skiSlopesScreenFragment, R.id.videosScreenFragment, R.id.tipDetailFragment, R.id.equipmentDetailFragment, R.id.loginScreenFragment, R.id.registerScreenFragment, R.id.profileScreenFragment, R.id.personalInformationFragment, R.id.settingsFragment, R.id.helpSupportFragment, R.id.changePasswordScreenFragment, R.id.changeEmailScreenFragment -> {
                 binding.bottomAppBar.visibility = View.GONE
-                binding.fab.hide()
             }
-
 
             else -> {
                 binding.bottomAppBar.visibility = View.VISIBLE
-                binding.fab.hide() //Need to change it to show
-                /**
-                 *  When I make the user Interface need this fab to make it show
-                 *  and to add it only to some of the screens
-                 */
                 binding.bottomAppBar.performShow()
             }
         }
