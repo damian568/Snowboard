@@ -5,23 +5,29 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.snowboard.R
 import com.example.snowboard.databinding.FragmentProfileScreenBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.launch
 
 class ProfileScreenFragment : Fragment() {
 
     private lateinit var binding: FragmentProfileScreenBinding
     private val auth = FirebaseAuth.getInstance()
     private val firestore = FirebaseFirestore.getInstance()
+    private var avatarBytes: ByteArray? = null
+    private var isUploadingAvatar = false
     private val pickAvatarImage = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
         uri?.let { setAvatarImage(it) }
     }
@@ -48,9 +54,42 @@ class ProfileScreenFragment : Fragment() {
     }
 
     private fun setAvatarImage(uri: Uri) {
+        val user = auth.currentUser ?: return
+
+        // Show the picked image right away while it uploads in the background
         Glide.with(this)
             .load(uri)
             .centerCrop()
+            .into(binding.imgAvatar)
+        isUploadingAvatar = true
+        binding.btnCamera.isEnabled = false
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            try {
+                avatarBytes = AvatarRepository.saveAvatar(requireContext(), user.uid, uri)
+            } catch (e: CancellationException) {
+                // Screen left mid-upload; the upload itself still finishes in the background
+                throw e
+            } catch (e: Exception) {
+                Toast.makeText(requireContext(), R.string.msg_avatar_upload_failed, Toast.LENGTH_LONG).show()
+                showAvatar(avatarBytes)
+            } finally {
+                isUploadingAvatar = false
+                binding.btnCamera.isEnabled = true
+            }
+        }
+    }
+
+    private fun showAvatar(bytes: ByteArray?) {
+        if (bytes == null) {
+            binding.imgAvatar.setImageResource(R.drawable.ic_snowboard_logo)
+            return
+        }
+        Glide.with(this)
+            .load(bytes)
+            .centerCrop()
+            .placeholder(R.drawable.ic_snowboard_logo)
+            .error(R.drawable.ic_snowboard_logo)
             .into(binding.imgAvatar)
     }
 
@@ -75,6 +114,11 @@ class ProfileScreenFragment : Fragment() {
                     getString(R.string.level_beginner_label)
                 } else {
                     getString(R.string.level_advanced_label)
+                }
+                // Don't replace the preview of an avatar that is still uploading
+                if (!isUploadingAvatar) {
+                    avatarBytes = AvatarRepository.avatarBytes(document)
+                    showAvatar(avatarBytes)
                 }
             }
     }

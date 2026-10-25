@@ -419,6 +419,7 @@
     <string name="menu_help_support">Help &amp; Support</string>
     <string name="btn_log_out">Log Out</string>
     <string name="change_profile_photo">Change profile photo</string>
+    <string name="msg_avatar_upload_failed">Couldn\'t save your profile photo. Please try again.</string>
 
     //Auth Validation
     <string name="error_full_name_required">Please enter your full name</string>
