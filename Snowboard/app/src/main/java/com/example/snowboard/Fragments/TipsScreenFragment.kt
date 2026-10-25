@@ -50,6 +50,8 @@ class TipsScreenFragment : Fragment() {
                 putString("TIP_TITLE", selectedTip.tipTitle)
                 putString("TIP_DESC", selectedTip.tipDescription)
                 putInt("TIP_IMAGE", selectedTip.tipImage)
+                putInt("TIP_ICON", selectedTip.tipIcon)
+                putString("TIP_QUOTE", selectedTip.tipQuote)
                 putString("TRANSITION_NAME", transitionName)
             }
 
@@ -104,7 +106,8 @@ class TipsScreenFragment : Fragment() {
                 tipTitle = getString(R.string.title_detail_tip_1),
                 tipDescription = getString(R.string.description_detail_tip_1),
                 tipImage = R.drawable.ic_snowboard_logo,
-                tipIcon = R.drawable.ic_snowboarding
+                tipIcon = R.drawable.ic_snowboarding,
+                tipQuote = getString(R.string.quote_detail_tip_1)
             )
         )
 
@@ -113,7 +116,8 @@ class TipsScreenFragment : Fragment() {
                 tipTitle = getString(R.string.title_detail_tip_2),
                 tipDescription = getString(R.string.description_detail_tip_2),
                 tipImage = R.drawable.ic_snowboard_logo,
-                tipIcon = R.drawable.ic_equipment
+                tipIcon = R.drawable.ic_equipment,
+                tipQuote = getString(R.string.quote_detail_tip_2)
             )
         )
 
@@ -122,7 +126,8 @@ class TipsScreenFragment : Fragment() {
                 tipTitle = getString(R.string.title_detail_tip_3),
                 tipDescription = getString(R.string.description_detail_tip_3),
                 tipImage = R.drawable.ic_snowboard_logo,
-                tipIcon = R.drawable.ic_school
+                tipIcon = R.drawable.ic_school,
+                tipQuote = getString(R.string.quote_detail_tip_3)
             )
         )
 
@@ -131,7 +136,8 @@ class TipsScreenFragment : Fragment() {
                 tipTitle = getString(R.string.title_detail_tip_4),
                 tipDescription = getString(R.string.description_detail_tip_4),
                 tipImage = R.drawable.ic_snowboard_logo,
-                tipIcon = R.drawable.ic_eye
+                tipIcon = R.drawable.ic_eye,
+                tipQuote = getString(R.string.quote_detail_tip_4)
             )
         )
 
@@ -140,7 +146,8 @@ class TipsScreenFragment : Fragment() {
                 tipTitle = getString(R.string.title_detail_tip_5),
                 tipDescription = getString(R.string.description_detail_tip_5),
                 tipImage = R.drawable.ic_snowboard_logo,
-                tipIcon = R.drawable.ic_stance
+                tipIcon = R.drawable.ic_stance,
+                tipQuote = getString(R.string.quote_detail_tip_5)
             )
         )
 
@@ -149,7 +156,8 @@ class TipsScreenFragment : Fragment() {
                 tipTitle = getString(R.string.title_detail_tip_6),
                 tipDescription = getString(R.string.description_detail_tip_6),
                 tipImage = R.drawable.ic_snowboard_logo,
-                tipIcon = R.drawable.ic_mountain
+                tipIcon = R.drawable.ic_mountain,
+                tipQuote = getString(R.string.quote_detail_tip_6)
             )
         )
 
@@ -158,7 +166,8 @@ class TipsScreenFragment : Fragment() {
                 tipTitle = getString(R.string.title_detail_tip_7),
                 tipDescription = getString(R.string.description_detail_tip_7),
                 tipImage = R.drawable.ic_snowboard_logo,
-                tipIcon = R.drawable.ic_flag_hill
+                tipIcon = R.drawable.ic_flag_hill,
+                tipQuote = getString(R.string.quote_detail_tip_7)
             )
         )
 
@@ -167,7 +176,8 @@ class TipsScreenFragment : Fragment() {
                 tipTitle = getString(R.string.title_detail_tip_8),
                 tipDescription = getString(R.string.description_detail_tip_8),
                 tipImage = R.drawable.ic_snowboard_logo,
-                tipIcon = R.drawable.ic_shield
+                tipIcon = R.drawable.ic_shield,
+                tipQuote = getString(R.string.quote_detail_tip_8)
             )
         )
 
@@ -176,7 +186,8 @@ class TipsScreenFragment : Fragment() {
                 tipTitle = getString(R.string.title_detail_tip_9),
                 tipDescription = getString(R.string.description_detail_tip_9),
                 tipImage = R.drawable.ic_snowboard_logo,
-                tipIcon = R.drawable.ic_hourglass
+                tipIcon = R.drawable.ic_hourglass,
+                tipQuote = getString(R.string.quote_detail_tip_9)
             )
         )
 
@@ -185,7 +196,8 @@ class TipsScreenFragment : Fragment() {
                 tipTitle = getString(R.string.title_detail_tip_10),
                 tipDescription = getString(R.string.description_detail_tip_10),
                 tipImage = R.drawable.ic_snowboard_logo,
-                tipIcon = R.drawable.ic_heart_outline
+                tipIcon = R.drawable.ic_heart_outline,
+                tipQuote = getString(R.string.quote_detail_tip_10)
             )
         )
     }

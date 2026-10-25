@@ -77,6 +77,17 @@
         \n \nКато нов ездач е нормално да се чувствате претоварени и неуверени в себе си. Просто запомни, единственото нещо между това къде се намирате днес и къде са професионалистите е колко време са прекарали на пистите.
         \n \nИзлезте и започнете да тренирате и за нула време ще тичате нагоре и надолу по склоновете.</string>
 
+    <string name="quote_detail_tip_1">Правилната дъска прави цялата разлика!</string>
+    <string name="quote_detail_tip_2">Удобни крака, щастлив сноубордист!</string>
+    <string name="quote_detail_tip_3">Научи го правилно още от първия ден!</string>
+    <string name="quote_detail_tip_4">Дъската отива там, където гледаш!</string>
+    <string name="quote_detail_tip_5">Меки колене, пълен контрол!</string>
+    <string name="quote_detail_tip_6">Карай напряко, контролирай скоростта!</string>
+    <string name="quote_detail_tip_7">Всеки професионалист е започнал от детската писта!</string>
+    <string name="quote_detail_tip_8">Гледай нагоре, карай безопасно и умно!</string>
+    <string name="quote_detail_tip_9">Овладей основите, после карай смело!</string>
+    <string name="quote_detail_tip_10">Усмихни се — на сноуборд си!</string>
+
     //Equipment Screen
     <string name="equipment_instruction">Натиснете за детайли</string>
     <string name="equipment_instruction_google">Търсете марки в &lt;a href="https://www.google.com"&gt;Google&lt;/a&gt;</string>
