@@ -95,6 +95,9 @@
     <dimen name="equip_badge_icon">24dp</dimen>
     <dimen name="equip_accent_width">22dp</dimen>
     <dimen name="equip_title_height">24dp</dimen>
+    <dimen name="equip_detail_photo">200dp</dimen>
+    <dimen name="equip_detail_title">22sp</dimen>
+    <dimen name="equip_brand_name">15sp</dimen>
     <dimen name="ski_resort_img">110dp</dimen>
     <dimen name="ski_pin">22dp</dimen>
     <dimen name="ski_arrow">28dp</dimen>

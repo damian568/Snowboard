@@ -114,6 +114,19 @@
     <string name="equipment_desc_detail_9">Термо Бельо – Помогнете за регулиране на телесната температура и предпазете потта от кожата си.</string>
     <string name="equipment_desc_detail_10">Чорапи – Проектиран за топлина, комфорт и по-добро прилягане в ботушите, намалявайки триенето и образуването на мехури.</string>
 
+    <string name="equipment_top_brands">Топ марки</string>
+    <string name="equipment_visit_shop">Магазин</string>
+    <string name="quote_detail_equipment_1">Избери дъската, която пасва на стила ти!</string>
+    <string name="quote_detail_equipment_2">Здраво закрепен значи с пълен контрол!</string>
+    <string name="quote_detail_equipment_3">Удобни обувки, повече часове на пистата!</string>
+    <string name="quote_detail_equipment_4">Пази главата си, карай уверено!</string>
+    <string name="quote_detail_equipment_5">Виждай ясно, карай по-умно!</string>
+    <string name="quote_detail_equipment_6">Топло, сухо и продължаваш да караш!</string>
+    <string name="quote_detail_equipment_7">Сухи крака, щастливи спускания!</string>
+    <string name="quote_detail_equipment_8">Топли ръце, здрав захват!</string>
+    <string name="quote_detail_equipment_9">Добрият ден започва с правилните слоеве!</string>
+    <string name="quote_detail_equipment_10">Щастливите крака започват с правилните чорапи!</string>
+
     //Brands
     //Snowboards
     <string name="brands_snowboards">

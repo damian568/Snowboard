@@ -1,76 +1,318 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.core.widget.NestedScrollView
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/equipment_detail_root"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="true"
         android:background="@color/ghost_white"
+        android:fitsSystemWindows="true"
         tools:context=".Fragments.Detail.EquipmentDetailFragment">
 
-        <LinearLayout
+        <!-- Header stays on top, slides away when scrolling down and returns when scrolling up -->
+        <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/contain_margin"
-            android:orientation="vertical">
+            android:background="@android:color/transparent"
+            android:stateListAnimator="@null"
+            app:elevation="0dp">
 
-            <FrameLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/detail_width_height">
+                android:layout_height="wrap_content"
+                app:layout_scrollFlags="scroll|enterAlways|snap">
 
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/header_art"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/history_header_height"
+                    android:background="@color/wine_maroon"
+                    android:contentDescription="@null"
+                    android:scaleType="matrix"
+                    android:src="@drawable/bg_home_hero_art"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:shapeAppearanceOverlay="@style/HeroImageShape" />
+
+                <!-- Mirrored chevron so it points back -->
                 <ImageView
-                    android:id="@+id/equipment_detail_img"
-                    android:layout_width="@dimen/detail_width_height"
-                    android:layout_height="@dimen/detail_width_height"
-                    android:layout_gravity="center"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/ic_equipment" />
-
-                <ImageButton
                     android:id="@+id/equipment_btn_close"
-                    android:layout_width="@dimen/close_btn_detail"
-                    android:layout_height="@dimen/close_btn_detail"
-                    android:layout_gravity="top|start"
-                    android:layout_margin="@dimen/contain_margin"
+                    android:layout_width="@dimen/tip_detail_back"
+                    android:layout_height="@dimen/tip_detail_back"
+                    android:layout_marginStart="12dp"
                     android:background="?attr/selectableItemBackgroundBorderless"
-                    android:src="@drawable/ic_close" />
+                    android:contentDescription="@null"
+                    android:padding="2dp"
+                    android:scaleX="-1"
+                    android:src="@drawable/ic_chevron_right"
+                    app:layout_constraintBottom_toBottomOf="@id/img_avatar"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/img_avatar"
+                    app:tint="@color/white" />
 
-            </FrameLayout>
+                <TextView
+                    android:id="@+id/txt_equipment_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/merriweathersans_semibold"
+                    android:gravity="center"
+                    android:text="@string/menu_equipment"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/home_title_text"
+                    app:layout_constraintBottom_toBottomOf="@id/img_avatar"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/img_avatar" />
 
-            <TextView
-                android:id="@+id/equipment_detail_title"
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/img_avatar"
+                    android:layout_width="@dimen/history_avatar"
+                    android:layout_height="@dimen/history_avatar"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@color/blush"
+                    android:contentDescription="@null"
+                    android:padding="3dp"
+                    android:src="@drawable/ic_snowboard_logo"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:shapeAppearanceOverlay="@style/CircleImageStyle"
+                    app:strokeColor="@color/white"
+                    app:strokeWidth="2.5dp"
+                    app:tint="@color/wine_maroon" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingBottom="@dimen/history_footer_height"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/title_margin"
-                android:text="Tip Title"
-                android:textColor="@color/midnight"
-                android:textSize="@dimen/detail_title_text"
-                android:textStyle="bold" />
+                android:orientation="vertical"
+                android:paddingStart="@dimen/start_end_margin"
+                android:paddingEnd="@dimen/start_end_margin">
 
-            <TextView
-                android:id="@+id/equipment_detail_description"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/start_end_margin"
-                android:layout_marginEnd="@dimen/start_end_margin"
-                android:layout_marginBottom="@dimen/detail_margin_bot"
-                android:lineSpacingExtra="@dimen/spacing"
-                android:text="Full description goes here..."
-                android:textSize="@dimen/detail_desc_text" />
+                <!-- Hero: product photo, then badge | divider | title, description underneath -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/history_card_gap"
+                    android:background="@drawable/bg_history_card"
+                    android:orientation="vertical"
+                    android:padding="@dimen/history_card_pad">
 
-            <TextView
-                android:id="@+id/equipment_detail_brands"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/start_end_margin"
-                android:layout_marginEnd="@dimen/start_end_margin"
-                android:layout_marginBottom="@dimen/detail_margin_bot"
-                android:lineSpacingExtra="@dimen/spacing"
-                android:text="Full brands goes here..."
-                android:textSize="@dimen/detail_desc_text" />
+                    <ImageView
+                        android:id="@+id/equipment_detail_img"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/equip_detail_photo"
+                        android:contentDescription="@null"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ic_equipment"
+                        tools:src="@drawable/boots_pic_equipment" />
 
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <FrameLayout
+                            android:layout_width="@dimen/tip_badge"
+                            android:layout_height="@dimen/tip_badge"
+                            android:background="@drawable/bg_tip_badge">
+
+                            <ImageView
+                                android:id="@+id/equipment_detail_icon"
+                                android:layout_width="@dimen/tip_badge_icon"
+                                android:layout_height="@dimen/tip_badge_icon"
+                                android:layout_gravity="center"
+                                android:contentDescription="@null"
+                                android:src="@drawable/ic_equipment"
+                                app:tint="@color/wine_maroon" />
+                        </FrameLayout>
+
+                        <View
+                            android:layout_width="1.5dp"
+                            android:layout_height="@dimen/tip_badge"
+                            android:layout_marginStart="14dp"
+                            android:background="@color/history_divider" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="14dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/equipment_detail_title"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/merriweathersans_bold"
+                                android:textColor="@color/wine_maroon"
+                                android:textSize="@dimen/equip_detail_title"
+                                tools:text="Boots" />
+
+                            <View
+                                android:layout_width="28dp"
+                                android:layout_height="2.5dp"
+                                android:layout_marginTop="8dp"
+                                android:background="@color/wine_maroon" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/equipment_detail_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="14dp"
+                        android:lineSpacingMultiplier="1.3"
+                        android:textColor="@color/history_body_text"
+                        android:textSize="@dimen/tip_detail_body"
+                        tools:text="Provide comfort, support, and proper fit, helping you control the board efficiently." />
+                </LinearLayout>
+
+                <!-- Brands that sell this item, one tappable row each (list_equipment_brand) -->
+                <LinearLayout
+                    android:id="@+id/equipment_brands_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/history_card_gap"
+                    android:background="@drawable/bg_history_card"
+                    android:orientation="vertical"
+                    android:paddingBottom="6dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="14dp">
+
+                        <FrameLayout
+                            android:layout_width="@dimen/equip_badge"
+                            android:layout_height="@dimen/equip_badge"
+                            android:background="@drawable/bg_tip_badge">
+
+                            <ImageView
+                                android:layout_width="@dimen/equip_badge_icon"
+                                android:layout_height="@dimen/equip_badge_icon"
+                                android:layout_gravity="center"
+                                android:contentDescription="@null"
+                                android:src="@drawable/ic_medal"
+                                app:tint="@color/wine_maroon" />
+                        </FrameLayout>
+
+                        <View
+                            android:layout_width="1.5dp"
+                            android:layout_height="@dimen/equip_badge"
+                            android:layout_marginStart="12dp"
+                            android:background="@color/history_divider" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/merriweathersans_bold"
+                            android:text="@string/equipment_top_brands"
+                            android:textColor="@color/wine_maroon"
+                            android:textSize="@dimen/tip_card_title" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/equipment_detail_brands"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical" />
+                </LinearLayout>
+
+                <!-- Closing banner: quote on the left, tinted photo fading in on the right -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/tip_quote_height"
+                    android:layout_marginTop="@dimen/history_card_gap"
+                    app:cardBackgroundColor="@color/history_card"
+                    app:cardCornerRadius="@dimen/history_card_corner"
+                    app:cardElevation="0dp"
+                    app:strokeWidth="0dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/equipment_quote_photo"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:contentDescription="@null"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/snowboard_history"
+                            android:tint="@color/history_card_header"
+                            android:tintMode="multiply"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintWidth_percent="0.66" />
+
+                        <View
+                            android:layout_width="@dimen/tip_quote_fade"
+                            android:layout_height="0dp"
+                            android:background="@drawable/bg_tip_quote_fade"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="@id/equipment_quote_photo"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/equipment_quote"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="18dp"
+                            android:fontFamily="@font/merriweathersans_bold"
+                            android:lineSpacingMultiplier="1.1"
+                            android:rotation="-6"
+                            android:textColor="@color/wine_maroon"
+                            android:textSize="@dimen/tip_quote_text"
+                            android:textStyle="italic"
+                            app:layout_constraintBottom_toTopOf="@id/equipment_quote_swoosh"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_chainStyle="packed"
+                            app:layout_constraintWidth_percent="0.46"
+                            tools:text="Comfy boots, longer days on the slopes!" />
+
+                        <View
+                            android:id="@+id/equipment_quote_swoosh"
+                            android:layout_width="96dp"
+                            android:layout_height="2.5dp"
+                            android:layout_marginTop="8dp"
+                            android:background="@color/wine_maroon"
+                            android:rotation="-8"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="@id/equipment_quote"
+                            app:layout_constraintTop_toBottomOf="@id/equipment_quote" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+        <!-- Forest stays pinned to the bottom while the cards scroll beneath it -->
+        <ImageView
+            android:id="@+id/footer_art"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/history_footer_height"
+            android:layout_gravity="bottom"
+            android:contentDescription="@null"
+            android:scaleType="centerCrop"
+            android:src="@drawable/bg_history_footer" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

@@ -1,13 +1,16 @@
 package com.example.snowboard.Fragments.Detail
 
+import android.content.Intent
 import android.graphics.Color
+import android.graphics.Matrix
+import android.net.Uri
 import android.os.Bundle
-import android.text.Html
-import android.text.method.LinkMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.doOnLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.snowboard.Constants.Constants
@@ -42,6 +45,7 @@ class EquipmentDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         hideTheToolbar()
+        cropHeaderArtToTop()
         // 1. Get the transition name passed from the list and apply it to the root view
         val transitionName = arguments?.getString("TRANSITION_NAME")
         view.findViewById<View>(R.id.equipment_detail_root).transitionName = transitionName
@@ -49,10 +53,15 @@ class EquipmentDetailFragment : Fragment() {
         // 2. Set the rest of your data...
         val imageRes = arguments?.getInt("EQUIPMENT_IMAGE") ?: Constants.Detail_IMG
         val title = arguments?.getString("EQUIPMENT_TITLE") ?: ""
+        val iconRes = arguments?.getInt("EQUIPMENT_ICON") ?: Constants.Detail_IMG
 
         binding.equipmentDetailTitle.text = title
+        binding.equipmentQuote.text = arguments?.getString("EQUIPMENT_QUOTE")
         if (imageRes != Constants.Detail_IMG) {
             binding.equipmentDetailImg.setImageResource(imageRes)
+        }
+        if (iconRes != Constants.Detail_IMG) {
+            binding.equipmentDetailIcon.setImageResource(iconRes)
         }
         changeDescDetail(title)
         brandsHTML(title)
@@ -62,7 +71,6 @@ class EquipmentDetailFragment : Fragment() {
             // It will automatically play the reverse "shrinking" animation!
             findNavController().navigateUp()
         }
-        textColors()
     }
 
     private fun changeDescDetail(title: String): String {
@@ -92,7 +100,10 @@ class EquipmentDetailFragment : Fragment() {
             "Чорапи" -> getString(R.string.equipment_desc_detail_10)
             else -> getString(R.string.equipment_instruction_google)
         }
-        return changeDesc.also { binding.equipmentDetailDescription.text = it }
+        // The title is already shown above, so drop the "Boots – " prefix
+        return changeDesc.also {
+            binding.equipmentDetailDescription.text = it.substringAfter(" – ")
+        }
     }
 
     // This logic maps the clicked item to the correct list of 10+ brands
@@ -124,16 +135,43 @@ class EquipmentDetailFragment : Fragment() {
             else -> getString(R.string.equipment_instruction_google)
         }
 
-        // Apply the text and make links clickable
-        binding.equipmentDetailBrands.text = Html.fromHtml(brandsHtml)
-        binding.equipmentDetailBrands.movementMethod = LinkMovementMethod.getInstance()
+        showBrands(brandsHtml)
     }
 
-    private fun textColors() {
-        binding.apply {
-            equipmentDetailTitle.setTextColor(resources.getColor(R.color.midnight))
-            equipmentDetailDescription.setTextColor(resources.getColor(R.color.shadow_black))
-            equipmentDetailBrands.setTextColor(resources.getColor(R.color.shadow_black))
+    // Each "Brand: <a href="...">Sourcing Link</a> <br>" line becomes a row that opens the shop.
+    // Brands without a link don't sell this item, so they're left out.
+    private fun showBrands(brandsHtml: String) {
+        val container = binding.equipmentDetailBrands
+        val brands = brandsHtml.split("<br>").mapNotNull { line ->
+            val name = line.substringBefore(":", "").trim()
+            // aapt strips the unescaped quotes, so the href usually arrives bare
+            val url = Regex("href=[\"']?([^\"'\\s>]+)").find(line)?.groupValues?.get(1)
+            if (name.isEmpty() || '<' in name || url == null) null else name to url
+        }
+        binding.equipmentBrandsCard.visibility = if (brands.isEmpty()) View.GONE else View.VISIBLE
+
+        brands.forEach { (name, url) ->
+            val row = layoutInflater.inflate(R.layout.list_equipment_brand, container, false)
+            row.findViewById<TextView>(R.id.brand_name).text = name
+            row.findViewById<View>(R.id.brand_row).setOnClickListener {
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+            }
+            container.addView(row)
+        }
+    }
+
+    // Scale the art to fill the header and keep its dark sky behind the title
+    private fun cropHeaderArtToTop() {
+        binding.headerArt.doOnLayout { view ->
+            val art = binding.headerArt.drawable ?: return@doOnLayout
+            val scale = maxOf(
+                view.width.toFloat() / art.intrinsicWidth,
+                view.height.toFloat() / art.intrinsicHeight
+            )
+            binding.headerArt.imageMatrix = Matrix().apply {
+                setScale(scale, scale)
+                postTranslate((view.width - art.intrinsicWidth * scale) / 2f, 0f)
+            }
         }
     }
 
