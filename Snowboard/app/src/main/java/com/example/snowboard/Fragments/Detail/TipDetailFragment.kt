@@ -55,8 +55,11 @@ class TipDetailFragment : Fragment() {
         val imageRes = arguments?.getInt("TIP_IMAGE") ?: Constants.Detail_IMG
         val iconRes = arguments?.getInt("TIP_ICON") ?: Constants.Detail_IMG
 
+        val quote = arguments?.getString("TIP_QUOTE")
         binding.tipDetailTitle.text = title
-        binding.tipQuote.text = arguments?.getString("TIP_QUOTE")
+        binding.tipQuote.text = quote
+        // The quote is optional on tips added by users
+        binding.tipQuoteCard.visibility = if (quote.isNullOrBlank()) View.GONE else View.VISIBLE
         if (imageRes != Constants.Detail_IMG) {
             binding.tipDetailImg.setImageResource(imageRes)
         }

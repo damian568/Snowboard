@@ -54,4 +54,9 @@
     <dimen name="home_card_subtitle_text">12sp</dimen>
     <dimen name="home_rating_text">13sp</dimen>
     <dimen name="home_badge_text">10sp</dimen>
+
+    //Delete Dialog
+    <dimen name="delete_dialog_title_text">18sp</dimen>
+    <dimen name="delete_dialog_message_text">14sp</dimen>
+    <dimen name="delete_dialog_button_text">14sp</dimen>
 </resources>

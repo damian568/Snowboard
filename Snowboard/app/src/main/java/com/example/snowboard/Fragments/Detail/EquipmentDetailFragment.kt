@@ -8,12 +8,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.doOnLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.snowboard.Constants.Constants
+import com.example.snowboard.Content.observeUserContent
+import com.example.snowboard.Content.showContentImage
+import com.example.snowboard.Content.bindOwnerActions
+import com.example.snowboard.Lists.ContentType
+import com.example.snowboard.Lists.UserContent
 import com.example.snowboard.R
 import com.example.snowboard.databinding.FragmentEquipmentDetailBinding
 import com.google.android.material.transition.MaterialContainerTransform
@@ -66,10 +72,36 @@ class EquipmentDetailFragment : Fragment() {
         changeDescDetail(title)
         brandsHTML(title)
 
+        // 3. Equipment users added to this category with the FAB, updated live
+        arguments?.getString("EQUIPMENT_CATEGORY")?.let { category ->
+            observeUserContent(ContentType.EQUIPMENT, category) { items -> showUserEquipment(items) }
+        }
+
         binding.equipmentBtnClose.setOnClickListener {
             // This tells the NavController to go back to the list.
             // It will automatically play the reverse "shrinking" animation!
             findNavController().navigateUp()
+        }
+    }
+
+    private fun showUserEquipment(items: List<UserContent>) {
+        val container = binding.equipmentUserItems
+        container.removeAllViews()
+        binding.equipmentUserCard.visibility = if (items.isEmpty()) View.GONE else View.VISIBLE
+
+        items.forEach { content ->
+            val row = layoutInflater.inflate(R.layout.list_user_equipment, container, false)
+            row.findViewById<TextView>(R.id.user_equipment_name).text = content.title
+            row.findViewById<TextView>(R.id.user_equipment_description).text = content.description
+
+            val photo = row.findViewById<ImageView>(R.id.user_equipment_photo)
+            photo.visibility = if (content.image != null) View.VISIBLE else View.GONE
+            content.image?.let { photo.showContentImage(it, R.drawable.ic_equipment) }
+
+            // Only the user who added it gets Edit / Delete
+            bindOwnerActions(row.findViewById(R.id.owner_actions), content)
+
+            container.addView(row)
         }
     }
 

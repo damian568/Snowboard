@@ -5,5 +5,7 @@ data class EquipmentList(
     val equipmentTitle: String,
     val equipmentDescription: String,
     val equipmentIcon: Int,
-    val equipmentQuote: String
+    val equipmentQuote: String,
+    // Stable key (the title is translated) that user-added equipment is filed under
+    val category: String
 )

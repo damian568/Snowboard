@@ -14,7 +14,11 @@ import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.snowboard.Adapters.TipsAdapter
+import com.example.snowboard.Content.observeUserContent
+import com.example.snowboard.Content.bindOwnerActions
+import com.example.snowboard.Lists.ContentType
 import com.example.snowboard.Lists.TipsList
+import com.example.snowboard.Lists.UserContent
 import com.example.snowboard.R
 import com.example.snowboard.databinding.FragmentTipsScreenBinding
 
@@ -42,7 +46,7 @@ class TipsScreenFragment : Fragment() {
         binding.recyclerView.setHasFixedSize(true)
 
         // 2. Attach the adapter
-        val tipsAdapter = TipsAdapter(tipsArrayList) { selectedTip, clickedCard ->
+        val tipsAdapter = TipsAdapter(tipsArrayList, { actions, content -> bindOwnerActions(actions, content) }) { selectedTip, clickedCard ->
 
             val transitionName = clickedCard.transitionName
 
@@ -64,6 +68,24 @@ class TipsScreenFragment : Fragment() {
         }
 
         binding.recyclerView.adapter = tipsAdapter
+
+        // 3. Tips added by users go above the built-in ones and update live
+        observeUserContent(ContentType.TIP) { userTips -> showUserTips(userTips) }
+    }
+
+    private fun showUserTips(userTips: List<UserContent>) {
+        tipsArrayList.removeAll { it.userContent != null }
+        tipsArrayList.addAll(0, userTips.map { content ->
+            TipsList(
+                tipTitle = content.title,
+                tipDescription = content.description,
+                tipImage = R.drawable.ic_snowboard_logo,
+                tipIcon = R.drawable.ic_tips,
+                tipQuote = content.quote,
+                userContent = content
+            )
+        })
+        binding.recyclerView.adapter?.notifyDataSetChanged()
     }
 
     private fun openDrawer() {

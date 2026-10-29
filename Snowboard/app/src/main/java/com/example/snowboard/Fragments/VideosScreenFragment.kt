@@ -13,6 +13,10 @@ import androidx.core.view.doOnLayout
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.snowboard.Adapters.VideosAdapter
+import com.example.snowboard.Content.observeUserContent
+import com.example.snowboard.Content.bindOwnerActions
+import com.example.snowboard.Lists.ContentType
+import com.example.snowboard.Lists.UserContent
 import com.example.snowboard.Lists.VideosList
 import com.example.snowboard.R
 import com.example.snowboard.databinding.FragmentVideosScreenBinding
@@ -39,8 +43,13 @@ class VideosScreenFragment : Fragment() {
         binding.recyclerView.layoutManager = layoutManager
         binding.recyclerView.setHasFixedSize(true)
 
-        val videosAdapter = VideosAdapter(videosArrayList, viewLifecycleOwner.lifecycle)
+        val videosAdapter = VideosAdapter(videosArrayList, viewLifecycleOwner.lifecycle) { actions, content ->
+            bindOwnerActions(actions, content)
+        }
         binding.recyclerView.adapter = videosAdapter
+
+        // Videos added by users go above the built-in ones and update live
+        observeUserContent(ContentType.VIDEO) { userVideos -> showUserVideos(userVideos) }
 
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             // This should now resolve correctly!
@@ -51,6 +60,15 @@ class VideosScreenFragment : Fragment() {
                 requireActivity().onBackPressedDispatcher.onBackPressed()
             }
         }
+    }
+
+    private fun showUserVideos(userVideos: List<UserContent>) {
+        videosArrayList.removeAll { it.userContent != null }
+        videosArrayList.addAll(0, userVideos.mapNotNull { content ->
+            val videoId = UserContent.youTubeId(content.link) ?: return@mapNotNull null
+            VideosList(videoId, content.title, content.description, userContent = content)
+        })
+        binding.recyclerView.adapter?.notifyDataSetChanged()
     }
 
     private fun openDrawer() {
