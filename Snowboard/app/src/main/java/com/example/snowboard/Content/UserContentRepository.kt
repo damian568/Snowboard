@@ -15,6 +15,7 @@ import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.firestore.Query
+import com.google.firebase.firestore.Source
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.ByteArrayOutputStream
@@ -34,6 +35,9 @@ object UserContentRepository {
     // A 640px JPEG is roughly 40-80 KB, well under Firestore's 1 MB document limit.
     private const val IMAGE_SIZE_PX = 640
     private const val JPEG_QUALITY = 75
+
+    // Firestore's limit for one batched write
+    private const val MAX_BATCH_WRITES = 500
 
     /** Streams every user's content of [type] (only [category] when given), newest first. Remove the registration when done. */
     fun listen(
@@ -90,6 +94,23 @@ object UserContentRepository {
     suspend fun delete(content: UserContent) {
         withContext(Dispatchers.IO) {
             Tasks.await(collection(content.type).document(content.id).delete())
+        }
+    }
+
+    /** Deletes every tip, equipment, ski slope and video [uid] added. Used when the account is deleted. */
+    suspend fun deleteAllOwnedBy(uid: String) {
+        withContext(Dispatchers.IO) {
+            ContentType.entries.forEach { type ->
+                // From the server, so nothing is missed because of a stale cache
+                val documents = Tasks.await(
+                    collection(type).whereEqualTo(FIELD_OWNER_ID, uid).get(Source.SERVER)
+                ).documents
+                documents.chunked(MAX_BATCH_WRITES).forEach { chunk ->
+                    val batch = FirebaseFirestore.getInstance().batch()
+                    chunk.forEach { batch.delete(it.reference) }
+                    Tasks.await(batch.commit())
+                }
+            }
         }
     }
 

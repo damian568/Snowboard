@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Delete your SnowBoard account</title>
+  <!-- Account deletion page linked from Google Play. Same look as index.html (password reset). -->
+  <style>
+    :root {
+      --wine: #7a1f3d;
+      --wine-dark: #5c1730;
+      --bg: #faf6f2;
+      --text: #1a1a1a;
+      --grey: #6b6b6b;
+      --error: #c62828;
+      --border: #e2ddd8;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text);
+      padding: 16px;
+    }
+    .card {
+      width: 100%;
+      max-width: 440px;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+      overflow: hidden;
+    }
+    .card-header {
+      background: var(--wine);
+      color: #fff;
+      padding: 20px 24px;
+      font-weight: 700;
+      font-size: 20px;
+      text-align: center;
+    }
+    .card-body { padding: 24px; }
+    h1 { font-size: 18px; margin: 0 0 6px; }
+    p, li { font-size: 14px; line-height: 1.5; }
+    p.subtitle { color: var(--grey); margin: 0 0 16px; }
+    ul { padding-left: 20px; margin: 0 0 16px; }
+    .info {
+      background: var(--bg);
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin-bottom: 20px;
+    }
+    .info p { margin: 0 0 8px; }
+    .info p:last-child { margin-bottom: 0; }
+    .field { margin-bottom: 14px; }
+    label {
+      display: block;
+      font-size: 13px;
+      color: var(--grey);
+      margin-bottom: 6px;
+    }
+    .input-wrap {
+      display: flex;
+      align-items: center;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0 12px;
+      height: 48px;
+    }
+    .input-wrap input {
+      border: none;
+      outline: none;
+      flex: 1;
+      font-size: 15px;
+      background: transparent;
+    }
+    button {
+      width: 100%;
+      height: 48px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 15px;
+      cursor: pointer;
+      margin-top: 8px;
+    }
+    button.primary {
+      border: none;
+      background: var(--wine);
+      color: #fff;
+    }
+    button.primary:not(:disabled):hover { background: var(--wine-dark); }
+    button.secondary {
+      border: 1px solid var(--border);
+      background: #fff;
+      color: var(--text);
+    }
+    button:disabled { opacity: 0.6; cursor: default; }
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--grey);
+      font-size: 13px;
+      margin: 18px 0 10px;
+    }
+    .divider::before, .divider::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+    .banner {
+      padding: 10px 12px;
+      border-radius: 10px;
+      font-size: 13px;
+      margin-bottom: 16px;
+      background: #fdecea;
+      color: var(--error);
+    }
+    .message-icon { font-size: 40px; text-align: center; margin-bottom: 8px; }
+    .center-text { text-align: center; }
+    .note { color: var(--grey); font-size: 13px; margin-top: 16px; }
+    a { color: var(--wine); }
+    [hidden] { display: none !important; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="card-header">SnowBoard</div>
+    <div class="card-body">
+
+      <div id="error" class="banner" hidden></div>
+
+      <!-- 1. What gets deleted, then sign in -->
+      <div id="sign-in-state">
+        <h1>Delete your account</h1>
+        <p class="subtitle">You can also do this in the app: Profile &rarr; Settings &rarr; Delete Account.</p>
+
+        <div class="info">
+          <p><strong>Deleted permanently, straight away:</strong></p>
+          <ul>
+            <li>Your account and login</li>
+            <li>Your profile: name, email, level and profile photo</li>
+            <li>Everything you added: tips, videos, ski slopes and equipment</li>
+          </ul>
+          <p>Nothing is kept after deletion.</p>
+        </div>
+
+        <p><strong>Sign in to confirm it's you.</strong></p>
+
+        <div class="field">
+          <label for="email">Email</label>
+          <div class="input-wrap">
+            <input id="email" type="email" autocomplete="email" />
+          </div>
+        </div>
+        <div class="field">
+          <label for="password">Password</label>
+          <div class="input-wrap">
+            <input id="password" type="password" autocomplete="current-password" />
+          </div>
+        </div>
+        <button id="sign-in-email" class="primary">SIGN IN</button>
+
+        <div class="divider">or</div>
+        <button id="sign-in-google" class="secondary">Continue with Google</button>
+
+        <p class="note">
+          Signed up with Facebook? Delete your account in the app, or email
+          <a href="mailto:damyants.work@gmail.com?subject=Delete%20my%20SnowBoard%20account">damyants.work@gmail.com</a>
+          from the address you use in SnowBoard.
+        </p>
+      </div>
+
+      <!-- 2. Last chance -->
+      <div id="confirm-state" hidden>
+        <h1>Delete this account?</h1>
+        <p class="subtitle">Signed in as <strong id="signed-in-email"></strong></p>
+        <p>Your account, profile and everything you added will be deleted. This can't be undone.</p>
+        <button id="delete-account" class="primary">DELETE MY ACCOUNT</button>
+        <button id="cancel" class="secondary">Cancel</button>
+      </div>
+
+      <!-- 3. Done -->
+      <div id="deleted-state" hidden class="center-text">
+        <div class="message-icon">✓</div>
+        <h1>Account deleted</h1>
+        <p class="subtitle">Your SnowBoard account and all your data have been deleted.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+  <script>
+    firebase.initializeApp({
+      apiKey: "AIzaSyCcCvx4gTm6ZOeAylfOwPmA4Q_M_cSbev0",
+      authDomain: "snowboard-8e1d3.firebaseapp.com",
+      projectId: "snowboard-8e1d3"
+    });
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+
+    // Collections that hold what users add in the app (see UserContentRepository / ContentType)
+    const CONTENT_COLLECTIONS = ['tips', 'equipment', 'skiSlopes', 'videos'];
+    const MAX_BATCH_WRITES = 500;
+
+    // Signed in only for this page, so closing the tab leaves nothing behind
+    auth.setPersistence(firebase.auth.Auth.Persistence.NONE);
+
+    function show(id) {
+      ['sign-in-state', 'confirm-state', 'deleted-state']
+        .forEach(s => document.getElementById(s).hidden = (s !== id));
+    }
+
+    function showError(message) {
+      const el = document.getElementById('error');
+      el.textContent = message;
+      el.hidden = !message;
+    }
+
+    function friendlyError(err) {
+      switch (err.code) {
+        case 'auth/invalid-credential':
+        case 'auth/invalid-login-credentials':
+        case 'auth/wrong-password':
+        case 'auth/user-not-found':
+          return 'Wrong email or password.';
+        case 'auth/invalid-email':
+          return 'Please enter a valid email.';
+        case 'auth/too-many-requests':
+          return 'Too many attempts. Please wait a moment and try again.';
+        case 'auth/popup-closed-by-user':
+        case 'auth/cancelled-popup-request':
+          return '';
+        default:
+          return err.message || 'Something went wrong. Please try again.';
+      }
+    }
+
+    function onSignedIn(user) {
+      showError('');
+      document.getElementById('signed-in-email').textContent = user.email || '';
+      show('confirm-state');
+    }
+
+    document.getElementById('sign-in-email').addEventListener('click', async (event) => {
+      const button = event.currentTarget;
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+      if (!email || !password) {
+        showError('Please enter your email and password.');
+        return;
+      }
+      button.disabled = true;
+      try {
+        const result = await auth.signInWithEmailAndPassword(email, password);
+        onSignedIn(result.user);
+      } catch (err) {
+        showError(friendlyError(err));
+      } finally {
+        button.disabled = false;
+      }
+    });
+
+    document.getElementById('sign-in-google').addEventListener('click', async () => {
+      try {
+        const result = await auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+        onSignedIn(result.user);
+      } catch (err) {
+        showError(friendlyError(err));
+      }
+    });
+
+    document.getElementById('cancel').addEventListener('click', async () => {
+      await auth.signOut();
+      show('sign-in-state');
+    });
+
+    // Same order as the app (AccountRepository.deleteAccount): the user's content, then users/{uid}
+    // (which also holds the profile photo), and the login last, since the security rules need it
+    // to allow deleting the rest
+    document.getElementById('delete-account').addEventListener('click', async (event) => {
+      const button = event.currentTarget;
+      const user = auth.currentUser;
+      if (!user) {
+        show('sign-in-state');
+        return;
+      }
+      button.disabled = true;
+      button.textContent = 'DELETING...';
+      showError('');
+      try {
+        for (const name of CONTENT_COLLECTIONS) {
+          const snapshot = await db.collection(name).where('ownerId', '==', user.uid).get();
+          for (let i = 0; i < snapshot.docs.length; i += MAX_BATCH_WRITES) {
+            const batch = db.batch();
+            snapshot.docs.slice(i, i + MAX_BATCH_WRITES).forEach(doc => batch.delete(doc.ref));
+            await batch.commit();
+          }
+        }
+        await db.collection('users').doc(user.uid).delete();
+        await user.delete();
+        show('deleted-state');
+      } catch (err) {
+        showError(
+          err.code === 'auth/requires-recent-login'
+            ? 'Please sign in again and retry.'
+            : "Couldn't delete your account. Check your connection and try again."
+        );
+        button.disabled = false;
+        button.textContent = 'DELETE MY ACCOUNT';
+      }
+    });
+  </script>
+</body>
+</html>

@@ -302,6 +302,51 @@
 
                 </LinearLayout>
 
+                <!-- Required by Google Play for apps with accounts -->
+                <LinearLayout
+                    android:id="@+id/row_delete_account"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="24dp"
+                    android:layout_marginBottom="24dp"
+                    android:background="@drawable/bg_login_input"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="16dp">
+
+                    <ImageView
+                        android:layout_width="34dp"
+                        android:layout_height="34dp"
+                        android:background="@drawable/bg_icon_badge"
+                        android:contentDescription="@null"
+                        android:padding="8dp"
+                        android:src="@drawable/ic_delete"
+                        app:tint="@color/crimson_red" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/merriweathersans_medium"
+                        android:text="@string/settings_delete_account"
+                        android:textColor="@color/crimson_red"
+                        android:textSize="@dimen/profile_menu_text" />
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:contentDescription="@null"
+                        android:src="@drawable/ic_chevron_right"
+                        app:tint="@color/crimson_red" />
+
+                </LinearLayout>
+
             </LinearLayout>
 
         </ScrollView>

@@ -100,6 +100,21 @@
         <item name="android:textSize">@dimen/login_input_text</item>
     </style>
 
+    <!-- Red message under a dialog field, instead of the system's black setError() popup -->
+    <style name="DialogFieldError">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginHorizontal">22dp</item>
+        <item name="android:layout_marginTop">6dp</item>
+        <item name="android:drawableStart">@drawable/ic_error_outline</item>
+        <item name="android:drawablePadding">6dp</item>
+        <item name="android:fontFamily">@font/merriweathersans_medium</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textColor">@color/crimson_red</item>
+        <item name="android:textSize">@dimen/delete_dialog_message_text</item>
+        <item name="android:visibility">gone</item>
+    </style>
+
     <!-- Edit / Delete buttons on content the signed-in user added; the parent row is hidden for everyone else -->
     <style name="OwnerActions">
         <item name="android:layout_width">wrap_content</item>

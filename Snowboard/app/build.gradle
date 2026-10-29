@@ -21,6 +21,15 @@ if (weatherApiKey.isEmpty()) {
     logger.warn('WEATHER_API_KEY is not set in local.properties - weather data will not load. See README.md.')
 }
 
+// EmailJS: emails the verification code before an account is deleted (no backend on the Spark plan).
+// Same lookup as the weather key: local.properties, or env vars on CI.
+def emailJs = ['EMAILJS_SERVICE_ID', 'EMAILJS_TEMPLATE_ID', 'EMAILJS_ADMIN_TEMPLATE_ID', 'EMAILJS_PUBLIC_KEY'].collectEntries { name ->
+    [(name): localProps.getProperty(name) ?: System.getenv(name) ?: '']
+}
+if (emailJs.values().any { it.isEmpty() }) {
+    logger.warn('EMAILJS_* is not set in local.properties - account deletion cannot send its verification code.')
+}
+
 android {
     namespace 'com.example.snowboard'
     compileSdk 34
@@ -35,6 +44,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         buildConfigField "String", "WEATHER_API_KEY", "\"${weatherApiKey}\""
+        emailJs.each { name, value -> buildConfigField "String", name, "\"${value}\"" }
     }
 
     buildTypes {
