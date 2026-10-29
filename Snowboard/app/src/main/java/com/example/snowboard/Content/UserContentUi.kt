@@ -25,9 +25,9 @@ import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.launch
 
 private const val TAG = "UserContent"
-private const val DIALOG_WIDTH_RATIO = 0.8f
+internal const val DIALOG_WIDTH_RATIO = 0.8f
 // Where the mountains start in bg_profile_header_art, below the empty sky
-private const val HEADER_ART_TOP = 0.17f
+internal const val HEADER_ART_TOP = 0.17f
 
 /** Shows the user's photo when there is one, otherwise the bundled [fallbackRes]. Safe to call from recycled rows. */
 fun ImageView.showContentImage(bytes: ByteArray?, fallbackRes: Int) {
@@ -97,7 +97,7 @@ private fun Fragment.confirmDelete(content: UserContent) {
 }
 
 /** Fills the width with the image and shows it from [topFraction] of its height down, so a wide band of a tall picture fits. */
-private fun ImageView.cropToBand(topFraction: Float) {
+internal fun ImageView.cropToBand(topFraction: Float) {
     val art = drawable ?: return
     val scale = width.toFloat() / art.intrinsicWidth
     imageMatrix = Matrix().apply {

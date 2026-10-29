@@ -414,4 +414,27 @@
     <string name="msg_content_delete_failed">Неуспешно изтриване. Провери връзката и опитай отново.</string>
     <string name="msg_sign_in_to_add">Влез в профила си, за да добавяш съдържание</string>
     <string name="equipment_added_by_riders">Добавено от потребители</string>
+
+    //Account deletion
+    <string name="settings_delete_account">Изтрий профила</string>
+    <string name="delete_account_title">Да изтрием ли профила ти?</string>
+    <string name="delete_account_message">Това изтрива завинаги профила ти и всичко, което си добавил: съвети, видеа, писти и екипировка. Действието не може да бъде отменено.</string>
+    <string name="delete_account_reauth_google">За да потвърдиш, ще трябва да влезеш отново с Google.</string>
+    <string name="delete_account_reauth_facebook">За да потвърдиш, ще трябва да влезеш отново с Facebook.</string>
+    <string name="btn_delete_account">ИЗТРИЙ</string>
+    <string name="btn_deleting">ИЗТРИВАНЕ…</string>
+    <string name="msg_account_deleted">Профилът ти беше изтрит</string>
+    <string name="msg_account_delete_failed">Профилът не можа да бъде изтрит. Провери връзката и опитай отново.</string>
+    <string name="error_reauth_wrong_account">Влез с профила, който искаш да изтриеш</string>
+    <string name="delete_account_code_sending">Изпращаме код за потвърждение на %1$s…</string>
+    <string name="delete_account_code_sent">Въведи 6-цифрения код, който изпратихме на %1$s</string>
+    <string name="delete_account_code_confirmed">Имейлът е потвърден. Въведи паролата си, за да изтриеш профила.</string>
+    <string name="delete_account_code_confirmed_social">Имейлът е потвърден.</string>
+    <string name="hint_verification_code">6-цифрен код</string>
+    <string name="btn_verify">ПОТВЪРДИ</string>
+    <string name="btn_resend_code">Изпрати кода отново</string>
+    <string name="btn_resend_code_in">Изпрати отново след %1$d сек.</string>
+    <string name="error_code_wrong">Грешен код. Провери имейла и опитай отново</string>
+    <string name="error_code_expired">Кодът е изтекъл. Натисни „Изпрати кода отново“</string>
+    <string name="msg_code_send_failed">Кодът за потвърждение не можа да бъде изпратен. Провери връзката и опитай отново.</string>
 </resources>

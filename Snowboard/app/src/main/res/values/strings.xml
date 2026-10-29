@@ -516,6 +516,27 @@
     <string name="settings_dark_mode">Dark Theme</string>
     <string name="settings_change_password">Change Password</string>
     <string name="settings_change_email">Change Email</string>
+    <string name="settings_delete_account">Delete Account</string>
+    <string name="delete_account_title">Delete your account?</string>
+    <string name="delete_account_message">This permanently deletes your profile and everything you added: tips, videos, ski slopes and equipment. This can\'t be undone.</string>
+    <string name="delete_account_reauth_google">To confirm, you\'ll be asked to sign in with Google again.</string>
+    <string name="delete_account_reauth_facebook">To confirm, you\'ll be asked to log in with Facebook again.</string>
+    <string name="btn_delete_account">DELETE</string>
+    <string name="btn_deleting">DELETING…</string>
+    <string name="msg_account_deleted">Your account has been deleted</string>
+    <string name="msg_account_delete_failed">Couldn\'t delete your account. Check your connection and try again.</string>
+    <string name="error_reauth_wrong_account">Sign in with the account you want to delete</string>
+    <string name="delete_account_code_sending">Sending a verification code to %1$s…</string>
+    <string name="delete_account_code_sent">Enter the 6-digit code we sent to %1$s</string>
+    <string name="delete_account_code_confirmed">Email confirmed. Enter your password to delete your account.</string>
+    <string name="delete_account_code_confirmed_social">Email confirmed.</string>
+    <string name="hint_verification_code">6-digit code</string>
+    <string name="btn_verify">VERIFY</string>
+    <string name="btn_resend_code">Resend code</string>
+    <string name="btn_resend_code_in">Resend code in %1$ds</string>
+    <string name="error_code_wrong">Wrong code. Check the email and try again</string>
+    <string name="error_code_expired">This code has expired. Tap Resend code</string>
+    <string name="msg_code_send_failed">Couldn\'t send the verification code. Check your connection and try again.</string>
 
     //Help and Support Screen
     <string name="help_faq_title">Frequently Asked Questions</string>

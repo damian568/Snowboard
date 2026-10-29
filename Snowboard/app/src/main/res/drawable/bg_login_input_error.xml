@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- bg_login_input with a red border, for a field with an error under it -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/white" />
+    <corners android:radius="14dp" />
+    <stroke android:color="@color/crimson_red" android:width="1.5dp" />
+</shape>

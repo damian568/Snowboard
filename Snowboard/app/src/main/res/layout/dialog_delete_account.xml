@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Same look as dialog_delete_content, plus re-authentication (password field, or a note for Google / Facebook) -->
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="18dp"
+        app:cardElevation="0dp"
+        app:strokeWidth="0dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- Cropped to the mountains band in code -->
+            <ImageView
+                android:id="@+id/img_header"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:contentDescription="@null"
+                android:scaleType="matrix"
+                android:src="@drawable/bg_profile_header_art"
+                app:layout_constraintDimensionRatio="H,1774:360"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@drawable/bg_delete_header_scrim"
+                app:layout_constraintBottom_toBottomOf="@id/img_header"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/img_header"
+                app:layout_constraintWidth_percent="0.45" />
+
+            <ImageView
+                android:layout_width="104dp"
+                android:layout_height="44dp"
+                android:contentDescription="@null"
+                android:rotation="-8"
+                android:scaleType="fitXY"
+                android:src="@drawable/bg_brush_stroke"
+                android:translationX="-20dp"
+                app:layout_constraintBottom_toBottomOf="@id/img_header"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/img_header" />
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="22dp"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_delete"
+                app:layout_constraintBottom_toBottomOf="@id/img_header"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/img_header"
+                app:tint="@color/white" />
+
+            <TextView
+                android:id="@+id/txt_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/merriweathersans_bold"
+                android:text="@string/delete_account_title"
+                android:textColor="@color/black"
+                android:textSize="@dimen/delete_dialog_title_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/img_header" />
+
+            <TextView
+                android:id="@+id/txt_message"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/merriweathersans_regular"
+                android:lineSpacingMultiplier="1.15"
+                android:text="@string/delete_account_message"
+                android:textColor="@color/grey"
+                android:textSize="@dimen/delete_dialog_message_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txt_title" />
+
+            <!-- Where we are: sending the code, code sent to ..., email confirmed -->
+            <TextView
+                android:id="@+id/txt_step_info"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/merriweathersans_medium"
+                android:textColor="@color/wine_maroon"
+                android:textSize="@dimen/delete_dialog_message_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txt_message" />
+
+            <!-- Step 1: the code emailed to the account -->
+            <LinearLayout
+                android:id="@+id/field_code"
+                android:layout_width="0dp"
+                android:layout_height="46dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_login_input"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txt_step_info">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_mail"
+                    app:tint="@color/grey" />
+
+                <EditText
+                    android:id="@+id/edit_code"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="12dp"
+                    android:layout_weight="1"
+                    android:autofillHints="smsOTPCode"
+                    android:background="@null"
+                    android:fontFamily="@font/merriweathersans_regular"
+                    android:hint="@string/hint_verification_code"
+                    android:inputType="number"
+                    android:maxLength="6"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/grey"
+                    android:textSize="@dimen/login_input_text" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/txt_code_error"
+                style="@style/DialogFieldError"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/field_code" />
+
+            <TextView
+                android:id="@+id/btn_resend_code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="14dp"
+                android:fontFamily="@font/merriweathersans_bold"
+                android:foreground="?attr/selectableItemBackground"
+                android:padding="6dp"
+                android:text="@string/btn_resend_code"
+                android:textColor="@color/wine_maroon"
+                android:textSize="@dimen/delete_dialog_message_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txt_code_error" />
+
+            <!-- Step 2, password accounts: confirm with their password -->
+            <LinearLayout
+                android:id="@+id/field_password"
+                android:layout_width="0dp"
+                android:layout_height="46dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/bg_login_input"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btn_resend_code">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_lock" />
+
+                <EditText
+                    android:id="@+id/edit_password"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="12dp"
+                    android:layout_weight="1"
+                    android:autofillHints="password"
+                    android:background="@null"
+                    android:fontFamily="@font/merriweathersans_regular"
+                    android:hint="@string/hint_password"
+                    android:inputType="textPassword"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/grey"
+                    android:textSize="@dimen/login_input_text" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/txt_password_error"
+                style="@style/DialogFieldError"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/field_password" />
+
+            <!-- Step 2, Google / Facebook accounts: told they will sign in again -->
+            <TextView
+                android:id="@+id/txt_reauth_note"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/merriweathersans_medium"
+                android:textColor="@color/wine_maroon"
+                android:textSize="@dimen/delete_dialog_message_text"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txt_password_error" />
+
+            <TextView
+                android:id="@+id/btn_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="38dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginEnd="14dp"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/bg_login_button"
+                android:elevation="2dp"
+                android:fontFamily="@font/merriweathersans_bold"
+                android:foreground="?attr/selectableItemBackground"
+                android:gravity="center"
+                android:letterSpacing="0.05"
+                android:minWidth="104dp"
+                android:paddingHorizontal="22dp"
+                android:text="@string/btn_delete_account"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="@dimen/delete_dialog_button_text"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txt_reauth_note" />
+
+            <TextView
+                android:id="@+id/btn_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="38dp"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="@font/merriweathersans_bold"
+                android:foreground="?attr/selectableItemBackground"
+                android:gravity="center"
+                android:letterSpacing="0.05"
+                android:paddingHorizontal="14dp"
+                android:text="@string/btn_cancel"
+                android:textAllCaps="true"
+                android:textColor="@color/wine_maroon"
+                android:textSize="@dimen/delete_dialog_button_text"
+                app:layout_constraintBottom_toBottomOf="@id/btn_delete"
+                app:layout_constraintEnd_toStartOf="@id/btn_delete"
+                app:layout_constraintTop_toTopOf="@id/btn_delete" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>
