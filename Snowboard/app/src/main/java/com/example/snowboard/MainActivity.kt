@@ -19,6 +19,8 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.bumptech.glide.Glide
+import com.example.snowboard.Fragments.AddContentDialog
+import com.example.snowboard.Lists.ContentType
 import com.example.snowboard.User.AvatarRepository
 import com.example.snowboard.User.Settings.AppPreferences
 import com.example.snowboard.databinding.ActivityMainBinding
@@ -53,10 +55,10 @@ class MainActivity : AppCompatActivity() {
 
     // Screens that have a FAB action, mapped to what the FAB adds there
     private val fabAddActions = mapOf(
-        R.id.tipsScreenFragment to R.string.add_tip,
-        R.id.equipmentDetailFragment to R.string.add_equipment,
-        R.id.skiSlopesScreenFragment to R.string.add_ski_slope,
-        R.id.videosScreenFragment to R.string.add_video
+        R.id.tipsScreenFragment to ContentType.TIP,
+        R.id.equipmentDetailFragment to ContentType.EQUIPMENT,
+        R.id.skiSlopesScreenFragment to ContentType.SKI_SLOPE,
+        R.id.videosScreenFragment to ContentType.VIDEO
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -171,27 +173,33 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun navControllerDestinationChanged() {
-        navController.addOnDestinationChangedListener { _, destination, _ ->
+        navController.addOnDestinationChangedListener { _, destination, arguments ->
             behaviorBottomAppBar(destination)
             updateSelectedDrawerItem(destination.id)
-            updateFab(destination.id)
+            updateFab(destination.id, arguments)
         }
     }
 
-    private fun updateFab(destinationId: Int) {
-        val addActionId = fabAddActions[destinationId]
-        if (addActionId == null) {
+    private fun updateFab(destinationId: Int, arguments: Bundle?) {
+        val contentType = fabAddActions[destinationId]
+        // Equipment is added under the category whose details are open (e.g. Boots)
+        val category = arguments?.getString("EQUIPMENT_CATEGORY")
+        if (contentType == null || (contentType == ContentType.EQUIPMENT && category == null)) {
             binding.fab.hide()
             return
         }
 
-        val addAction = getString(addActionId)
-        binding.fab.contentDescription = addAction
-        binding.fab.setOnClickListener {
-            // Placeholder until the add flows are built
-            Toast.makeText(this, getString(R.string.msg_coming_soon, addAction), Toast.LENGTH_SHORT).show()
-        }
+        binding.fab.contentDescription = getString(contentType.addTitle)
+        binding.fab.setOnClickListener { openAddContent(contentType, category) }
         binding.fab.show()
+    }
+
+    private fun openAddContent(contentType: ContentType, category: String?) {
+        if (FirebaseAuth.getInstance().currentUser == null) {
+            Toast.makeText(this, R.string.msg_sign_in_to_add, Toast.LENGTH_SHORT).show()
+            return
+        }
+        AddContentDialog.newInstance(contentType, category).show(supportFragmentManager, AddContentDialog.TAG)
     }
 
     private fun updateSelectedDrawerItem(destinationId: Int) {

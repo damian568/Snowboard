@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Darkens the left of the delete dialog's mountain header so the trash icon stands out -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <gradient
+        android:angle="0"
+        android:centerColor="#99720423"
+        android:endColor="#00720423"
+        android:startColor="#F2720423" />
+</shape>

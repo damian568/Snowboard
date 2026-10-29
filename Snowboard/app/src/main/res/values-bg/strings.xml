@@ -10,6 +10,7 @@
     <string name="menu_ski_slopes">Писти</string>
     <string name="menu_videos">Видеа</string>
     <string name="menu_weather">Време</string>
+    <string name="menu_profile">Профил</string>
 
     //Detail
     <string name="detail_tips">Подробности за върха</string>
@@ -379,5 +380,38 @@
     <string name="add_equipment">Добави екипировка</string>
     <string name="add_ski_slope">Добави писта</string>
     <string name="add_video">Добави видео</string>
-    <string name="msg_coming_soon">%1$s — очаквайте скоро</string>
+    <string name="edit_tip">Редактирай съвет</string>
+    <string name="edit_equipment">Редактирай екипировка</string>
+    <string name="edit_ski_slope">Редактирай писта</string>
+    <string name="edit_video">Редактирай видео</string>
+    <string name="add_content_subtitle">Всички виждат какво добавяш. Само ти можеш да го редактираш или изтриеш.</string>
+    <string name="hint_tip_title">Заглавие на съвета</string>
+    <string name="hint_equipment_name">Име на екипировката</string>
+    <string name="hint_resort_name">Име на курорта</string>
+    <string name="hint_video_title">Заглавие на видеото</string>
+    <string name="hint_description">Описание</string>
+    <string name="hint_description_optional">Описание (по избор)</string>
+    <string name="hint_quote_optional">Кратък цитат (по избор)</string>
+    <string name="hint_youtube_link">YouTube линк</string>
+    <string name="hint_website_optional">Уебсайт (по избор)</string>
+    <string name="add_photo_optional">Добави снимка (по избор)</string>
+    <string name="remove_photo">Премахни снимката</string>
+    <string name="btn_add">ДОБАВИ</string>
+    <string name="btn_saving">ЗАПАЗВАНЕ…</string>
+    <string name="btn_cancel">Отказ</string>
+    <string name="action_edit">Редактирай</string>
+    <string name="action_delete">Изтрий</string>
+    <string name="ski_slope_website">Уебсайт</string>
+    <string name="delete_content_title">Изтриване на \"%1$s\"?</string>
+    <string name="delete_content_message">Това действие не може да бъде отменено.</string>
+    <string name="error_field_required">Това поле е задължително</string>
+    <string name="error_invalid_youtube_link">Въведи валиден YouTube линк</string>
+    <string name="error_invalid_website">Въведи валиден уеб адрес</string>
+    <string name="msg_content_added">Добавено</string>
+    <string name="msg_content_updated">Промените са запазени</string>
+    <string name="msg_content_deleted">Изтрито</string>
+    <string name="msg_content_save_failed">Неуспешно запазване. Провери връзката и опитай отново.</string>
+    <string name="msg_content_delete_failed">Неуспешно изтриване. Провери връзката и опитай отново.</string>
+    <string name="msg_sign_in_to_add">Влез в профила си, за да добавяш съдържание</string>
+    <string name="equipment_added_by_riders">Добавено от потребители</string>
 </resources>

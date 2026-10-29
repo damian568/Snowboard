@@ -85,5 +85,24 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:tint="@color/wine_maroon" />
+
+        <!-- Takes the chevron's place on tips the signed-in user added -->
+        <LinearLayout
+            android:id="@+id/owner_actions"
+            style="@style/OwnerActions"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/btn_edit"
+                style="@style/OwnerEditButton" />
+
+            <ImageView
+                android:id="@+id/btn_delete"
+                style="@style/OwnerDeleteButton"
+                android:layout_marginTop="10dp" />
+        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

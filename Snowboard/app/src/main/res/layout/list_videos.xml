@@ -77,10 +77,29 @@
             android:maxLines="2"
             android:textColor="@color/wine_maroon"
             android:textSize="@dimen/tip_card_title"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/owner_actions"
             app:layout_constraintStart_toEndOf="@id/video_divider"
             app:layout_constraintTop_toBottomOf="@id/video_frame"
             tools:text="Why Riding Duck Foot Is Holding You Back" />
+
+        <!-- Only shown on videos the signed-in user added -->
+        <LinearLayout
+            android:id="@+id/owner_actions"
+            style="@style/OwnerActions"
+            android:layout_marginEnd="4dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/titleVideos">
+
+            <ImageView
+                android:id="@+id/btn_edit"
+                style="@style/OwnerEditButton" />
+
+            <ImageView
+                android:id="@+id/btn_delete"
+                style="@style/OwnerDeleteButton"
+                android:layout_marginStart="8dp" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/descriptionVideos"

@@ -194,6 +194,7 @@
 
                 <!-- Closing banner: quote on the left, tinted photo fading in on the right -->
                 <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/tip_quote_card"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/tip_quote_height"
                     android:layout_marginTop="@dimen/history_card_gap"

@@ -5,5 +5,7 @@ data class TipsList(
     val tipDescription: String,
     val tipImage: Int,
     val tipIcon: Int,
-    val tipQuote: String
+    val tipQuote: String,
+    // Set when a user added this tip rather than it being built in
+    val userContent: UserContent? = null
 )

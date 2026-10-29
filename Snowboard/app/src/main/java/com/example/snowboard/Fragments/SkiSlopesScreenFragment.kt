@@ -2,6 +2,7 @@ package com.example.snowboard.Fragments
 
 import android.graphics.Matrix
 import android.os.Bundle
+import android.text.TextUtils
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +13,11 @@ import androidx.core.view.doOnLayout
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.snowboard.Adapters.SkiSlopesAdapter
+import com.example.snowboard.Content.observeUserContent
+import com.example.snowboard.Content.bindOwnerActions
+import com.example.snowboard.Lists.ContentType
 import com.example.snowboard.Lists.SkiSlopesList
+import com.example.snowboard.Lists.UserContent
 import com.example.snowboard.R
 import com.example.snowboard.databinding.FragmentSkiSlopesScreenBinding
 
@@ -38,8 +43,36 @@ class SkiSlopesScreenFragment : Fragment() {
         binding.recyclerView.layoutManager = layoutManager
         binding.recyclerView.setHasFixedSize(true)
 
-        val skiSlopesAdapter = SkiSlopesAdapter(skiSlopesArrayList)
+        val skiSlopesAdapter = SkiSlopesAdapter(skiSlopesArrayList) { actions, content -> bindOwnerActions(actions, content) }
         binding.recyclerView.adapter = skiSlopesAdapter
+
+        // Ski slopes added by users go above the built-in ones and update live
+        observeUserContent(ContentType.SKI_SLOPE) { userSlopes -> showUserSlopes(userSlopes) }
+    }
+
+    private fun showUserSlopes(userSlopes: List<UserContent>) {
+        // Keep a slope open if it was open before the update
+        val expandedIds = skiSlopesArrayList.filter { it.isExpanded }.mapNotNull { it.userContent?.id }.toSet()
+        skiSlopesArrayList.removeAll { it.userContent != null }
+        skiSlopesArrayList.addAll(0, userSlopes.map { content ->
+            SkiSlopesList(
+                R.drawable.ic_snowboard_logo,
+                content.title,
+                content.description,
+                R.drawable.ic_snowboard_logo,
+                websiteLink(content),
+                isExpanded = content.id in expandedIds,
+                userContent = content
+            )
+        })
+        binding.recyclerView.adapter?.notifyDataSetChanged()
+    }
+
+    // Same "Name: <a>…</a>" shape as the built-in link strings, which the adapter renders as HTML
+    private fun websiteLink(content: UserContent): String {
+        if (content.link.isBlank()) return ""
+        return "${TextUtils.htmlEncode(content.title)}: <a href=\"${TextUtils.htmlEncode(content.link)}\">" +
+            "${getString(R.string.ski_slope_website)}</a>"
     }
 
     private fun openDrawer() {

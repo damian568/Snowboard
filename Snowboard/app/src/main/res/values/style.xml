@@ -57,6 +57,77 @@
         <item name="android:buttonTint">@color/wine_maroon</item>
     </style>
 
+    <!-- Add / Edit dialog: frosted glass row of icon | divider | input over the mountain photo -->
+    <style name="AddContentField">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">12dp</item>
+        <item name="android:minHeight">58dp</item>
+        <item name="android:background">@drawable/bg_glass_field</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:paddingStart">16dp</item>
+        <item name="android:paddingEnd">16dp</item>
+    </style>
+
+    <style name="AddContentFieldIcon">
+        <item name="android:layout_width">24dp</item>
+        <item name="android:layout_height">24dp</item>
+        <item name="android:contentDescription">@null</item>
+        <item name="tint">@color/white</item>
+    </style>
+
+    <style name="AddContentFieldDivider">
+        <item name="android:layout_width">1.5dp</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:layout_marginStart">14dp</item>
+        <item name="android:layout_marginEnd">14dp</item>
+        <item name="android:background">#D9FFFFFF</item>
+    </style>
+
+    <style name="AddContentInput">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@null</item>
+        <item name="android:fontFamily">@font/merriweathersans_regular</item>
+        <item name="android:paddingTop">16dp</item>
+        <item name="android:paddingBottom">16dp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textColorHint">#D9E8EEF4</item>
+        <!-- Cursor in the text colour so it shows on the dark glass -->
+        <item name="android:textCursorDrawable">@null</item>
+        <item name="android:textSize">@dimen/login_input_text</item>
+    </style>
+
+    <!-- Edit / Delete buttons on content the signed-in user added; the parent row is hidden for everyone else -->
+    <style name="OwnerActions">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:visibility">gone</item>
+    </style>
+
+    <style name="OwnerActionButton">
+        <item name="android:layout_width">30dp</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:background">@drawable/bg_icon_badge</item>
+        <item name="android:foreground">?attr/selectableItemBackgroundBorderless</item>
+    </style>
+
+    <style name="OwnerEditButton" parent="OwnerActionButton">
+        <item name="android:contentDescription">@string/action_edit</item>
+        <item name="android:src">@drawable/ic_edit</item>
+        <item name="tint">@color/wine_maroon</item>
+    </style>
+
+    <style name="OwnerDeleteButton" parent="OwnerActionButton">
+        <item name="android:contentDescription">@string/action_delete</item>
+        <item name="android:src">@drawable/ic_delete</item>
+        <item name="tint">@color/crimson_red</item>
+    </style>
+
     <style name="NavDrawerRow">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/nav_row_height</item>

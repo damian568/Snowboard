@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="18dp"
+        app:cardElevation="0dp"
+        app:strokeWidth="0dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- Cropped to the mountains band in code -->
+            <ImageView
+                android:id="@+id/img_header"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:contentDescription="@null"
+                android:scaleType="matrix"
+                android:src="@drawable/bg_profile_header_art"
+                app:layout_constraintDimensionRatio="H,1774:360"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@drawable/bg_delete_header_scrim"
+                app:layout_constraintBottom_toBottomOf="@id/img_header"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/img_header"
+                app:layout_constraintWidth_percent="0.45" />
+
+            <!-- Same brush swipe as the Add/Edit dialog title, behind the trash icon -->
+            <ImageView
+                android:layout_width="104dp"
+                android:layout_height="44dp"
+                android:contentDescription="@null"
+                android:rotation="-8"
+                android:scaleType="fitXY"
+                android:src="@drawable/bg_brush_stroke"
+                android:translationX="-20dp"
+                app:layout_constraintBottom_toBottomOf="@id/img_header"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/img_header" />
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="22dp"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_delete"
+                app:layout_constraintBottom_toBottomOf="@id/img_header"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/img_header"
+                app:tint="@color/white" />
+
+            <TextView
+                android:id="@+id/txt_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/merriweathersans_bold"
+                android:textColor="@color/black"
+                android:textSize="@dimen/delete_dialog_title_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/img_header" />
+
+            <TextView
+                android:id="@+id/txt_message"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/merriweathersans_regular"
+                android:text="@string/delete_content_message"
+                android:textColor="@color/grey"
+                android:textSize="@dimen/delete_dialog_message_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txt_title" />
+
+            <TextView
+                android:id="@+id/btn_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="38dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="14dp"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/bg_login_button"
+                android:elevation="2dp"
+                android:fontFamily="@font/merriweathersans_bold"
+                android:foreground="?attr/selectableItemBackground"
+                android:gravity="center"
+                android:letterSpacing="0.05"
+                android:minWidth="104dp"
+                android:paddingHorizontal="22dp"
+                android:text="@string/action_delete"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="@dimen/delete_dialog_button_text"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txt_message" />
+
+            <TextView
+                android:id="@+id/btn_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="38dp"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="@font/merriweathersans_bold"
+                android:foreground="?attr/selectableItemBackground"
+                android:gravity="center"
+                android:letterSpacing="0.05"
+                android:paddingHorizontal="14dp"
+                android:text="@string/btn_cancel"
+                android:textAllCaps="true"
+                android:textColor="@color/wine_maroon"
+                android:textSize="@dimen/delete_dialog_button_text"
+                app:layout_constraintBottom_toBottomOf="@id/btn_delete"
+                app:layout_constraintEnd_toStartOf="@id/btn_delete"
+                app:layout_constraintTop_toTopOf="@id/btn_delete" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

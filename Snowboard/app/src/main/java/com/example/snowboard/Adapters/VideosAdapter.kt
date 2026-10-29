@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import androidx.recyclerview.widget.RecyclerView
+import com.example.snowboard.Lists.UserContent
 import com.example.snowboard.Lists.VideosList
 import com.example.snowboard.R
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
@@ -17,7 +18,8 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTube
 
 class VideosAdapter(
     private val videosList: List<VideosList>,
-    private val lifecycle: Lifecycle
+    private val lifecycle: Lifecycle,
+    private val bindOwnerActions: (View, UserContent?) -> Unit
 ) :
     RecyclerView.Adapter<VideosAdapter.ViewHolder>() {
 
@@ -37,6 +39,10 @@ class VideosAdapter(
 
         holder.titleVideos.text = currentItem.title
         holder.descriptionVideos.text = currentItem.description
+        holder.descriptionVideos.visibility = if (currentItem.description.isBlank()) View.GONE else View.VISIBLE
+
+        // Only the user who added the video gets Edit / Delete
+        bindOwnerActions(holder.ownerActions, currentItem.userContent)
 
         // 1. Add the custom lifecycle to the player view
         lifecycle.addObserver(holder.webVideos)
@@ -100,6 +106,7 @@ class VideosAdapter(
         val webVideos: YouTubePlayerView = itemView.findViewById(R.id.webVideos)
         val titleVideos: TextView = itemView.findViewById(R.id.titleVideos)
         val descriptionVideos: TextView = itemView.findViewById(R.id.descriptionVideos)
+        val ownerActions: View = itemView.findViewById(R.id.owner_actions)
         var isInitialized = false
         var youtubePlayer: YouTubePlayer? = null
     }

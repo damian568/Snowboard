@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Rough paint-brush swipe behind the Add/Edit dialog title -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="300dp"
+    android:height="80dp"
+    android:viewportWidth="300"
+    android:viewportHeight="80">
+    <path
+        android:fillColor="@color/wine_maroon"
+        android:pathData="M10,28 L44,19 L120,13 L206,9 L268,6 L298,2 L284,13 L300,16 L278,23 L294,30 L270,36 L288,44 L264,50 L282,58 L240,64 L160,68 L92,72 L32,77 L2,73 L22,66 L4,58 L20,52 L8,44 L24,38 Z" />
+    <path
+        android:fillColor="@color/wine_maroon"
+        android:pathData="M70,9 L196,3 L194,6 L72,12 Z" />
+    <path
+        android:fillColor="@color/wine_maroon"
+        android:pathData="M108,77 L232,70 L234,73 L110,80 Z" />
+</vector>

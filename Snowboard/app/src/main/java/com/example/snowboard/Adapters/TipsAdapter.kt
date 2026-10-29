@@ -7,11 +7,13 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.snowboard.Lists.TipsList
+import com.example.snowboard.Lists.UserContent
 import com.example.snowboard.R
 import com.google.android.material.card.MaterialCardView
 
 class TipsAdapter(
     private val tipsList: ArrayList<TipsList>,
+    private val bindOwnerActions: (View, UserContent?) -> Unit,
     private val onItemClick: (TipsList, View) -> Unit
 ) :
     RecyclerView.Adapter<TipsAdapter.ViewHolder>() {
@@ -32,13 +34,18 @@ class TipsAdapter(
         holder.textTitle.text = component.tipTitle
         holder.textDescription.text = component.tipDescription
 
-        // 1. Give this specific card a unique transition name based on its title
-        holder.cardView.transitionName = "card_transform_${component.tipTitle}"
+        // 1. Give this specific card a unique transition name (user tips can share a title, so they use their id)
+        holder.cardView.transitionName = "card_transform_${component.userContent?.id ?: component.tipTitle}"
 
         holder.cardView.setOnClickListener {
             // 2. Pass BOTH the data and the clicked card view
             onItemClick(component, holder.cardView)
         }
+
+        // 3. Only the user who added a tip gets Edit / Delete, in place of the chevron
+        bindOwnerActions(holder.ownerActions, component.userContent)
+        holder.chevron.visibility =
+            if (holder.ownerActions.visibility == View.VISIBLE) View.INVISIBLE else View.VISIBLE
     }
 
     override fun getItemCount(): Int {
@@ -50,5 +57,7 @@ class TipsAdapter(
         val textTitle: TextView = itemView.findViewById(R.id.title)
         val textDescription: TextView = itemView.findViewById(R.id.description)
         val cardView: MaterialCardView = itemView.findViewById(R.id.tip_cardView)
+        val chevron: ImageView = itemView.findViewById(R.id.tip_chevron)
+        val ownerActions: View = itemView.findViewById(R.id.owner_actions)
     }
 }
