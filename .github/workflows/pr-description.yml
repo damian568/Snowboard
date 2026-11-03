@@ -1,0 +1,73 @@
+name: PR description
+
+# Separate from android-ci.yml so editing a PR's title or description re-runs only this check, not the build
+on:
+  pull_request:
+    types: [ opened, edited, reopened, synchronize ]
+    branches: [ main ]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+# Only reads the event payload, no checkout or token needed
+permissions: {}
+
+jobs:
+  # Every PR needs a "SNOW-<number> ..." title matching its branch, and a filled-in
+  # "What's new" and "Testing" section (see .github/pull_request_template.md)
+  pr-description:
+    name: PR description
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Check PR title and description
+        # Passed through env, never pasted into the script, so PR text can't run as shell code
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_BODY: ${{ github.event.pull_request.body }}
+          HEAD_REF: ${{ github.head_ref }}
+        run: |
+          bad=0
+          fail() { echo "::error::$1"; bad=1; }
+
+          # Title: SNOW-<number> <Description>, and the same ticket as the branch name
+          ticket=$(printf '%s' "$HEAD_REF" | grep -oE 'SNOW-[0-9]+' | head -n 1)
+          if ! printf '%s' "$PR_TITLE" | grep -qE '^SNOW-[0-9]+ [^ ]'; then
+            fail "Title \"$PR_TITLE\" — expected: SNOW-<number> <Description>"
+          elif [ -n "$ticket" ] && ! printf '%s' "$PR_TITLE" | grep -qE "^$ticket "; then
+            fail "Title must start with $ticket to match the branch $HEAD_REF"
+          fi
+
+          # Description, without Windows line endings and the template's <!-- guidance --> comments
+          body=$(printf '%s' "$PR_BODY" | tr -d '\r' | perl -0pe 's/<!--.*?-->//gs')
+
+          # Anything written outside the headings at all?
+          if ! printf '%s\n' "$body" | grep -vE '^#+ ' | grep -q '[[:alnum:]]'; then
+            fail "The description is empty — fill in the PR template (What's new, Testing)"
+          else
+            # Prints the lines under the heading matching $1, up to the next heading
+            section() {
+              printf '%s\n' "$body" | awk -v heading="$1" '
+                found && /^#+ / { exit }
+                found { print }
+                tolower($0) ~ heading { found = 1 }
+              '
+            }
+
+            # "what.s" also accepts a typographic apostrophe (What’s new)
+            for name in "What's new" "Testing"; do
+              pattern="^##+ *$(printf '%s' "$name" | tr '[:upper:]' '[:lower:]' | sed "s/'/./g") *\$"
+              if ! printf '%s\n' "$body" | tr '[:upper:]' '[:lower:]' | grep -qE "$pattern"; then
+                fail "Missing section: ### $name"
+              elif ! section "$pattern" | grep -q '[[:alnum:]]'; then
+                fail "Section \"### $name\" is empty — describe it under the heading"
+              fi
+            done
+          fi
+
+          if [ $bad -eq 0 ]; then
+            echo "✔ PR title and description follow the template"
+          fi
+          exit $bad
