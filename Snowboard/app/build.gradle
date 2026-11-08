@@ -7,6 +7,7 @@ plugins {
     id 'kotlin-parcelize'
     id 'org.jetbrains.kotlin.android'
     id 'com.google.gms.google-services'
+    id 'jacoco'
 }
 
 // OpenWeather API key: read from local.properties (gitignored), or the WEATHER_API_KEY env var on CI.
@@ -48,6 +49,10 @@ android {
     }
 
     buildTypes {
+        debug {
+            // ./gradlew createDebugUnitTestCoverageReport -Pcoverage  (opt-in: instrumenting slows the tests down)
+            enableUnitTestCoverage = project.hasProperty('coverage')
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -66,12 +71,29 @@ android {
         enabled = true
     }
 
+    // 11 rather than 1.8: MockK's inline helpers (every, mockk, ...) are built for JVM 11
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = '11'
+    }
+
+    testOptions {
+        unitTests {
+            // Robolectric needs the merged manifest and resources to run Android code on the JVM
+            includeAndroidResources = true
+            // The screens' header art is large; Robolectric decodes it for every test
+            all {
+                maxHeapSize = '3g'
+                // Lets JaCoCo see the classes Robolectric loads in its own classloader
+                jacoco {
+                    includeNoLocationClasses = true
+                    excludes = ['jdk.internal.*']
+                }
+            }
+        }
     }
 }
 
@@ -155,6 +177,17 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.13.2'
+    // Unit tests: Robolectric runs Android code on the JVM, MockK fakes Firebase and friends
+    testImplementation 'org.robolectric:robolectric:4.11.1'
+    testImplementation 'androidx.test:core-ktx:1.5.0'
+    testImplementation 'androidx.test.ext:junit-ktx:1.1.5'
+    testImplementation 'io.mockk:mockk:1.13.8'
+    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3'
+    testImplementation 'com.squareup.okhttp3:mockwebserver:3.14.9'
+    // Launches Fragments in Robolectric tests (adds an empty host Activity to the debug manifest)
+    debugImplementation 'androidx.fragment:fragment-testing:1.3.6'
+    // fragment-testing pulls in an old androidx.test:core whose activities lack android:exported
+    debugImplementation 'androidx.test:core:1.5.0'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     implementation 'com.airbnb.android:lottie:4.2.0'

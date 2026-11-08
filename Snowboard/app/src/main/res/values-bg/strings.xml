@@ -366,8 +366,8 @@
 
     //Weather TextView
     <string name="weather_day">Днес</string>
-    <string name="weather_min">Мин: %d °C</string>
-    <string name="weather_max">Макс: %d °C</string>
+    <string name="weather_min">Мин: %d °%2$s</string>
+    <string name="weather_max">Макс: %d °%2$s</string>
     <string name="weather_humidity">Влажност</string>
     <string name="weather_wind">Скорост на вятъра</string>
     <string name="weather_condition">Условия</string>
