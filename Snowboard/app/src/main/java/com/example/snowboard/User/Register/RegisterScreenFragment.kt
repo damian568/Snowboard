@@ -13,6 +13,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.example.snowboard.BuildConfig
 import com.example.snowboard.R
 import com.example.snowboard.User.Model.UserProfile
 import com.example.snowboard.User.PasswordRequirements
@@ -104,6 +105,8 @@ class RegisterScreenFragment : Fragment() {
 
         binding.btnGoogle.setOnClickListener { socialAuthHelper.signInWithGoogle() }
 
+        // Hidden until the Facebook app ID / client token are configured (see README.md)
+        binding.btnFacebook.visibility = if (BuildConfig.FACEBOOK_ENABLED) View.VISIBLE else View.GONE
         binding.btnFacebook.setOnClickListener { socialAuthHelper.signInWithFacebook() }
     }
 

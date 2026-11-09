@@ -25,6 +25,21 @@ If the key is missing, the build still succeeds but logs a warning and weather w
 
 GitHub Actions reads the key from the `WEATHER_API_KEY` repository secret (Settings → Secrets and variables → Actions). It's optional — CI builds without it.
 
+### Facebook Login
+
+Facebook sign-in needs a Facebook app (developers.facebook.com) with the Facebook Login use case, and the Facebook provider enabled in Firebase Authentication (App ID + App secret; the secret goes only in the Firebase console). The Android platform in the Facebook app needs package `com.example.snowboard`, class `com.example.snowboard.MainActivity` and your key hashes.
+
+Add the app ID and client token (App settings → Basic / Advanced) to `Snowboard/local.properties`:
+
+```properties
+FACEBOOK_APP_ID=your_app_id
+FACEBOOK_CLIENT_TOKEN=your_client_token
+```
+
+`app/build.gradle` turns them into the string resources the Facebook SDK reads and sets `BuildConfig.FACEBOOK_ENABLED`. **If either value is missing the Facebook buttons on the Login and Register screens stay hidden**, so builds without them (e.g. CI) still work. Never put the App secret in the app or the repo.
+
+CI reads `FACEBOOK_APP_ID` and `FACEBOOK_CLIENT_TOKEN` from repository secrets — optional.
+
 ### Git hooks
 
 Commit messages must follow `SNOW-<number> <Description>`. The hook in `.githooks/` is installed automatically on the first Gradle sync.
