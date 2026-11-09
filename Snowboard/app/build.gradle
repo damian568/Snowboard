@@ -31,6 +31,15 @@ if (emailJs.values().any { it.isEmpty() }) {
     logger.warn('EMAILJS_* is not set in local.properties - account deletion cannot send its verification code.')
 }
 
+// Facebook Login: app ID + client token from the Facebook Developer app. Same lookup again.
+// Without both, the Facebook buttons are hidden (BuildConfig.FACEBOOK_ENABLED) and the SDK gets placeholders.
+def facebookAppId = localProps.getProperty('FACEBOOK_APP_ID') ?: System.getenv('FACEBOOK_APP_ID') ?: ''
+def facebookClientToken = localProps.getProperty('FACEBOOK_CLIENT_TOKEN') ?: System.getenv('FACEBOOK_CLIENT_TOKEN') ?: ''
+def facebookEnabled = !facebookAppId.isEmpty() && !facebookClientToken.isEmpty()
+if (!facebookEnabled) {
+    logger.warn('FACEBOOK_APP_ID / FACEBOOK_CLIENT_TOKEN are not set in local.properties - the Facebook login button is hidden. See README.md.')
+}
+
 android {
     namespace 'com.example.snowboard'
     compileSdk 34
@@ -46,6 +55,13 @@ android {
 
         buildConfigField "String", "WEATHER_API_KEY", "\"${weatherApiKey}\""
         emailJs.each { name, value -> buildConfigField "String", name, "\"${value}\"" }
+
+        // Read by the Facebook SDK through the manifest (<meta-data> / the fb<appId> redirect scheme)
+        def fbAppIdValue = facebookEnabled ? facebookAppId : 'FACEBOOK_APP_ID'
+        resValue "string", "facebook_app_id", fbAppIdValue
+        resValue "string", "facebook_client_token", facebookEnabled ? facebookClientToken : 'FACEBOOK_CLIENT_TOKEN'
+        resValue "string", "fb_login_protocol_scheme", "fb${fbAppIdValue}"
+        buildConfigField "boolean", "FACEBOOK_ENABLED", "${facebookEnabled}"
     }
 
     buildTypes {

@@ -81,6 +81,8 @@ jobs:
         # Optional repo secret; the build still succeeds without it (weather just won't load in the APK)
         env:
           WEATHER_API_KEY: ${{ secrets.WEATHER_API_KEY }}
+          FACEBOOK_APP_ID: ${{ secrets.FACEBOOK_APP_ID }}
+          FACEBOOK_CLIENT_TOKEN: ${{ secrets.FACEBOOK_CLIENT_TOKEN }}
         run: ./gradlew assembleDebug --stacktrace
 
       - name: Run unit tests
